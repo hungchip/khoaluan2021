@@ -1,0 +1,80 @@
+.banner {
+    height: 400px;
+    background-image: url('../images/room-banner.jpeg');
+}
+
+.list-image-carousel {
+    display: flex;
+    justify-content: center;
+    img {
+        max-width: 150px;
+        padding: 10px;
+    }
+}
+
+.room-detail,
+.container-carousel-h3 {
+    font-size: 24px;
+    color: @text-dark;
+    margin: 20px 0 34px;
+    position: relative;
+    &:after{
+        position: absolute;
+        content: "";
+        height: 2px;
+        width: 120px;
+        background-color: @orange;
+        top: 35px;
+        left: 0;
+    }
+}
+
+.content-info-right {
+    font-size: 16px;
+    strong {
+        padding-left: 32px;
+    }
+    button {
+        width: 100%;
+        padding: 10px 0;
+        background-color: @orange;
+        font-size: 30px;
+        .transition(.3s);
+    }
+}
+
+.content-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    font-size: 20px;
+    border-top: solid 1px @line-gray;
+    strong {
+        font-size: 29px;
+        color: @orange;
+    }   
+}
+
+.carousel-hook-item {
+    text-align: center;
+    padding: 10px;
+    a {
+        color: @orange;
+    }
+    h4 {
+        color: @orange;
+        font-size: 18px;
+        padding: 10px 0;
+        font-weight: 700;
+    }
+}
+
+@media screen and (max-width: 768px)
+{
+    .list-image-carousel {
+        img {
+            max-width: 90px;
+        }
+    }
+}

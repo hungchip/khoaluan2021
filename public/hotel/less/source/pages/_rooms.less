@@ -1,0 +1,69 @@
+.banner {
+    height: 400px;
+    background-image: url('../images/room-banner.jpeg');
+}
+
+.content {
+    padding: 40px 0 30px;
+}
+
+.padding-room {
+    padding-bottom: 15px;
+}
+
+.over-view {
+    padding-bottom: 30px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.room-image {
+    overflow: hidden;
+    img {
+        .transition(.4s);
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    
+}
+
+.room-info {
+    padding: 5px;
+    border-left: 1px solid @line-gray;
+    border-right: 1px solid @line-gray;
+}
+
+.room-info-title a {
+    font-size: 22px;
+    font-weight: 600;
+    color: @orange;
+}
+
+.room-info-desc {
+    font-size: 14px;
+    color: @text-gray;
+}
+
+.room-price {
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+    color: @text-gray;
+    border: 1px solid @line-gray;
+}
+
+.room-price span {
+    color: @orange;
+    font-size: 26px;
+    font-weight: 700;
+}
+.room-price button {
+    margin: 10px 0 0;
+    width: 100%;
+    background-color: @orange;
+    padding: 10px 25px;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+}

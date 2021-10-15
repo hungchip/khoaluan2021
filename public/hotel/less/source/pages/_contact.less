@@ -1,0 +1,52 @@
+.banner {
+    height: 400px;
+    background-image: url('../images/room-banner.jpeg');
+}
+
+.confirm {
+    font-size: 16px;
+    padding: 20px 0;
+    span {
+        color: red;
+    }
+}
+
+.confirm-list {
+    max-width: 350px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    input, textarea {
+        width: 250px;
+        border: 1px solid @text-gray;
+    }
+    button {
+        background-color: @orange;
+        padding: 5px 15px;
+    }
+}
+
+
+.confirm-contact-list {
+    background: #eee;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    text-align: center;
+    color: @orange;
+    a {
+        color: #000;
+        .transition(.4s);
+        &:hover {
+            color: @orange;
+        }
+    }
+    &:not(:last-child){
+        padding-bottom: 15px;
+    }
+}

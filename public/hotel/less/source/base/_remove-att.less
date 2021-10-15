@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.6rem;
+    overflow-x: hidden;
+    font-weight: 400;
+    background-color: #fff;
+    transition: all ease-in-out .6s;
+}
+
+p {
+    margin: 0;
+}
+
+
+img {
+    width: 100%;
+}
+
+a {
+    color: unset;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+button {
+    // outline: 0;
+    background: none;
+    border: 0;
+    color: #fff;
+}
+*::before , *::after {
+    .transition(.4s);
+}
+button:focus {
+    // outline: none;
+    background-color: none;
+}
+
+label {
+    margin: 0;
+}
+
+input, select, textarea:focus {
+    outline: 0;
+}
+
+// for firefox
+input[type=number] {
+    -moz-appearance: none;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.t-datepicker-day {
+    border-radius: 0;
+}
+
+ul, ol ,li {
+    padding: 0;
+    margin: 0;
+}
+
+input {
+    height: 40px;
+}
