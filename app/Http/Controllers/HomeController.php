@@ -44,7 +44,7 @@ class HomeController extends Controller
 
     public function showPageBooking()
     {
-        return view('hotel.booking');
+        return view('hotel.form-booking.booking');
     }
 
     public function showPageGallery()

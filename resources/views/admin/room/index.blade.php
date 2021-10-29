@@ -26,19 +26,19 @@
             </button>
         </div> --}}
             <div class="col-sm-1  mb-sm-0 mb-20 h-50px">
-                <a href="{{route('roomType.create')}}" class="btn btn-success btn-user btn-search">
+                <a href="{{route('room.create')}}" class="btn btn-success btn-user btn-search">
                     <i class="fas fa-user-plus"></i></i>&nbsp; Thêm mới
                 </a>
-
             </div>
         </div>
+        
     </div>
 
 </form>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Danh sách các loại phòng</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách các phòng</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -46,50 +46,54 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Tên</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
+                        <th>Loại phòng</th>
                         <th>Người lớn</th>
                         <th>Trẻ em</th>
-                        <th>Ảnh đại diện</th>
-                        <th>Ngày khởi tạo</th>
+                        <th>Ngày đến</th>
+                        <th>Ngày đi</th>
+                        <th>Trạng thái</th>
                         <th>Thiết lập</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Tên</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
+                        <th>Loại phòng</th>
                         <th>Người lớn</th>
                         <th>Trẻ em</th>
-                        <th>Ảnh đại diện</th>
-                        <th>Ngày khởi tạo</th>
+                        <th>Ngày đến</th>
+                        <th>Ngày đi</th>
+                        <th>Trạng thái</th>
                         <th>Thiết lập</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach($roomTypes as $roomType)
+                    @foreach($rooms as $room)
                     <tr>
-                        <td>{{$roomType->room_type_id}}</td>
-                        <td>{{$roomType->room_type_name}}</td>
-                        <td>{{number_format($roomType->room_type_price)}}</td>
-                        <td>{{$roomType->room_type_amount}}</td>
-                        <td>{{$roomType->room_type_adult}}</td>
-                        <td>{{$roomType->room_type_child}}</td>
-                        <td><img src="public/image/{{$roomType->avatar}}" alt="" width="200"></td>
-                        <td>{{date('d-m-Y H:m:s', strtotime($roomType->created_at))}}</td>
-
-                        <form action="{{route('roomType.destroy',$roomType->room_type_id)}}" method="post">
+                        <td>{{$room->room_id}}</td>
+                        <td>{{$room->roomType->room_type_name}}</td>
+                        <td>{{$room->room_adult}}</td>
+                        <td>{{$room->room_child}}</td>
+                        <td></td>
+                        <td></td>
+                        @if ($room->status == 0)
+                        <td>Còn trống</td>
+                        @elseif ($room->status == 1)
+                        <td>Đang ở</td>
+                        @elseif ($room->status == 2)
+                        <td>Chưa dọn dẹp</td>
+                        @elseif ($room->status == 3)
+                        <td>Đang sửa</td>
+                        @endif
+                        <form action="{{route('room.destroy',$room->room_id)}}" method="post">
                             @csrf
                             @method('delete')
                             <td>
-                                <a href="{{route('roomType.show',$roomType->room_type_id)}}"
+                                <a href=""
                                     class="btn btn-primary btn-circle btn-sm" title="Chi tiết">
                                     <i class="fas fa-info"></i>
                                 </a>
-                                <a href="{{route('roomType.edit',$roomType->room_type_id)}}"
+                                <a href=""
                                     class="btn btn-warning btn-circle btn-sm" title="Chỉnh sửa">
                                     <i class="fas fa-user-edit"></i>
                                 </a>

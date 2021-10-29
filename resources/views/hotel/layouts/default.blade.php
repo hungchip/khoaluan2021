@@ -51,25 +51,25 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav ul-nav">
                             <li class="nav-item active">
-                                <a class="" aria-current="page" href="{{route('home')}}">Home</a>
+                                <a class="" aria-current="page" href="{{route('home')}}">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="" href="{{route('showPageAbout')}}">About</a>
+                                <a class="" href="{{route('showPageAbout')}}">Về chúng tôi</a>
                             </li>
                             <li class="nav-item">
-                                <a class="" href="{{route('showPageRoom')}}">Room</a>
+                                <a class="" href="{{route('showPageRoom')}}">Phòng</a>
                             </li>
                             <li class="nav-item">
-                                <a class="" href="{{route('showPageBooking')}}">Booking</a>
+                                <a class="" href="{{route('showStepOne')}}">Đặt phòng</a>
                             </li>
                             <li class="nav-item">
-                                <a class="" href="{{route('showPageGallery')}}">Gallery</a>
+                                <a class="" href="{{route('showPageGallery')}}">Bộ sưu tập</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="" href="{{route('showPageBlog')}}">Blog</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
-                                <a class="" href="{{route('showPageContact')}}">Contact</a>
+                                <a class="" href="{{route('showPageContact')}}">Liên hệ</a>
                             </li>
                             <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -120,7 +120,7 @@
             </ul>
         </div>
         <div class="footer-content">
-            <p>Copyright &copy; AE Hotel - 2021. All Rights Reserved By Creative Racer.</p>
+            <p>Bản quyền bởi &copy; Vũ Việt Hưng - K61THA - Học viện Nông nghiệp Việt Nam</p>
         </div>
     </footer>
     <!-- Optional JavaScript -->
@@ -158,16 +158,16 @@
     <script src="{{ asset('public/hotel/js/main.js')}}"></script>
     @yield('js')
     <script>
+        // test
+            
+
         // ajax for step 1
-        $(document).ready(function() {
-            $('div.price').on('click', function(e){
-                e.preventDefault();
-                alert('hello test');
-            });
-        });
 
         $(document).ready(function() {
-            $('#btn-search').on('click', function(e){
+            // $('.booking-room-image').on('click', function(){
+            //     console.log('hello');
+            // });
+            $('#btn-search1').on('click', function(e){
                 e.preventDefault(); // ngăn load lại trang
                 $.ajax({
                 url: "{{route('showStepOne')}}",

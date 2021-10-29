@@ -25,15 +25,15 @@
                             name="price">
                         <span class="error-message text-danger">{{$errors->first('price')}}</span></p>
                     </div>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control form-control-user" id="" placeholder="Mô tả"
-                            name="description">
-                        <span class="error-message text-danger">{{$errors->first('description')}}</span></p>
-                    </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" id="" placeholder="Mô tả ngắn"
                             name="quote">
                         <span class="error-message text-danger">{{$errors->first('quote')}}</span></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-user" id="" placeholder="Mô tả"
+                            name="description">
+                        <span class="error-message text-danger">{{$errors->first('description')}}</span></p>
                     </div>
                     <div class="col-sm-6">
                         <input type="number" class="form-control form-control-user" id="" placeholder="Số người lớn"

@@ -9,9 +9,9 @@
                             <div class="carousel-cell"><img src="assets/images/banner4.jpg" alt=""></div>
                         </div> -->
     <div class="intro text-center">
-        <p class="intro-top">Best place for</p>
-        <p class="intro-mid">Spend your holiday</p>
-        <p class="intro-bot">Responsive and Elegant Design</p>
+        <p class="intro-top">Nơi tuyệt vời nhất</p>
+        <p class="intro-mid">Dành cho kỳ nghỉ của bạn</p>
+        <p class="intro-bot">Hòa mình với thiên nhiên</p>
         <div class="stage">
             <div class="icon-down box bounce-1"><a href="#welcome"><i class="fas fa-angle-down"></i></a></div>
         </div>
@@ -44,8 +44,8 @@
                 <div class="select-adult">
                     <label for="adult"></label>
                     <!-- <input type="text" id="adult" name="adult" placeholder="adult"> -->
-                    <select id="adult" name="adult" placeholder="">
-                        <option value="hide" disabled selected>-- Adult --</option>
+                    <select id="adult" name="adult" placeholder="" class="cus-select">
+                        <option value="hide" disabled selected>Người lớn</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -56,8 +56,8 @@
                 <div class="select-child">
                     <label for="child"></label>
                     <!-- <input type="text" id="child" name="child" placeholder="child"> -->
-                    <select id="child" name="child">
-                        <option value="hide" disabled selected>-- Child --</option>
+                    <select id="child" name="child" class="cus-select">
+                        <option value="hide" disabled selected>Trẻ em</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="submit-button">
-                <button>Check</button>
+                <button>Đặt phòng</button>
             </div>
         </form>
     </div>
@@ -79,21 +79,24 @@
     <div class="container">
         <div class="welcome-text">
             <div class="welcome-text-title">
-                Welcome
+                Anh Em Hotel kính chào quý khách
             </div>
             <div class="welcome-text-content">
                 <p>
-                    dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum egestas tellus et viverra.
-                    Vestibulum euismod lacus eget nisi ornare, id laoreet tortor dapibus. Donec lacinia euismod diam,
-                    convallis tempus risus. Ut et felis tempor eros blandit feugiat
-                    ut non enim. In vestibulum ligula blandit magna blandit dictum. Aenean ultricies enim nec lorem
-                    vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum egestas
-                    tellus et viverra. Vestibulum
-                    euismod lacus eget nisi ornare, id laoreet tortor dapibus. Donec lacinia euismod diam, convallis
-                    tempus risus. Ut et felis tempor eros blandit feugiat ut non enim. In vestibulum ligula blandit
-                    magna blandit dictum. Aenean ultricies
-                    enim nec lorem vestibulum, nec
+                    Khách sạn Anh Em Hotel sở hữu vị trí đẹp và nổi bật. Nằm ngay bên bờ biển Bắc
+                    Mỹ An, là khu nghỉ dưỡng sang trọng cùng dịch vụ phong phú mang đến kỳ
+                    nghỉ thật thú vị.
+                    Bờ biển miền Trung Việt Nam với dải cát dài trắng mịn cũng là điểm đến hấp dẫn cho những kỳ nghỉ gia
+                    đình. Là một thành phố đang phát triển, cảnh quan thiên nhiên ưu ái với bờ biển đẹp, nhiều điểm tham
+                    quan nổi tiếng, Đà Nẵng là điểm đến mới thú vị tại miền Trung Việt Nam.
+                    Trang bị bởi cơ sở thiết bị hiện đại cho sự kiện và những dịch vụ riêng biệt của Pullman, Pullman Đà
+                    Nẵng là trung tâm hội nghị lý tưởng tại Đà Nẵng. Khách sạn Pullman Đà Nẵng mang đến sự lựa chọn về
+                    không gian hội nghị rộng lớn phù hợp với các sự kiện của doanh nghiệp hay không gian ngoài trời phù
+                    hợp với tiệc cưới trên bãi biển hay tiệc tối bên bãi biển.
+
+
                 </p>
+                <p>Anh Em Hotel – là sự lựa chọn cho mọi kỳ nghỉ.</p>
             </div>
         </div>
         <div class="welcome-icon">
@@ -105,7 +108,7 @@
                             <img src="{{ asset('public/hotel/images/beg.png')}}" alt="">
                         </div>
                         <div class="welcome-icon-title">
-                            LUXURY GUEST ROOM
+                            Phòng khách sang trọng
                         </div>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 welcome-icon-item">
@@ -113,7 +116,7 @@
                             <img src="{{ asset('public/hotel/images/breakfast.png')}}" alt="">
                         </div>
                         <div class="welcome-icon-title">
-                            Elegant restaurant
+                            Nhà hàng thanh lịch
                         </div>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 welcome-icon-item">
@@ -129,7 +132,7 @@
                             <img src="{{ asset('public/hotel/images/pool.png') }}" alt="">
                         </div>
                         <div class="welcome-icon-title">
-                            Infinity swimming pool
+                            Bể bơi vô cực
                         </div>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 welcome-icon-item">
@@ -137,7 +140,7 @@
                             <img src="{{ asset('public/hotel/images/airplane.png') }}" alt="">
                         </div>
                         <div class="welcome-icon-title">
-                            Airport drop off service
+                            Dịch vụ đưa đón sân bay
                         </div>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 welcome-icon-item">
@@ -145,7 +148,7 @@
                             <img src="{{ asset('public/hotel/images/service.png') }}" alt="">
                         </div>
                         <div class="welcome-icon-title">
-                            24 hours support
+                            Hỗ trợ 24/7
                         </div>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 welcome-icon-item">
@@ -153,7 +156,7 @@
                             <img src="{{ asset('public/hotel/images/wifi.png') }}" alt="">
                         </div>
                         <div class="welcome-icon-title">
-                            Height speed internet/wifi
+                            Internet/wifi tốc độ cao
                         </div>
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 welcome-icon-item">
@@ -161,7 +164,7 @@
                             <img src="{{ asset('public/hotel/images/parking.png') }}" alt="">
                         </div>
                         <div class="welcome-icon-title">
-                            Car parking
+                            Hầm gửi xe
                         </div>
                     </div>
 
@@ -193,7 +196,7 @@
 <section id="special" class="special">
     <div class="container-fluid">
         <div class="special-title">
-            Special Room
+            Phòng đặc biệt
         </div>
         <div class="slick  ">
             @foreach ($specialRooms as $room)
@@ -222,7 +225,7 @@
 <!-- room  -->
 <section id="room" class="room">
     <div class="room-title">
-        All rooms
+        Tất cả phòng
     </div>
     <div class="room-img">
         <div class="container">
@@ -235,7 +238,7 @@
                             <p>{{$room->room_type_name}}</p>
                             {{-- <p>Moun view</p> --}}
                             {{-- <p>2 bed / AC / Balcony</p> --}}
-                            <p>Per Night {{number_format($room->room_type_price)}} VND</p>
+                            <p>1 ngày đêm: {{number_format($room->room_type_price)}} VND</p>
                         </div>
                         <div class="room-img-background"></div>
                     </a>
@@ -245,7 +248,7 @@
         </div>
     </div>
     <div class="room-view">
-        <a href="{{route('showPageRoom')}}">View All</a>
+        <a href="{{route('showPageRoom')}}">Chi tiết</a>
     </div>
 </section>
 
@@ -256,29 +259,29 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="col-inner">
-                    <span id="count-room" class="count">0</span>
-                    <p class="">Rooms</p>
+                    <span id="count-room" class="count">50</span>
+                    <p class="">Phòng</p>
                 </div>
             </div>
             <div class="
                             col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="col-inner">
                     <span class="count">100</span>
-                    <p class="">Stuff</p>
+                    <p class="">Nhân sự</p>
                 </div>
             </div>
             <div class="
                                 col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="col-inner">
                     <span class="count">900</span>
-                    <p class="">Happy Clients</p>
+                    <p class="">Đánh giá tích cực</p>
                 </div>
             </div>
             <div class="
                                     col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="col-inner">
                     <span class="count">300</span>
-                    <p class="">Awards Received</p>
+                    <p class="">Giải thưởng đã nhận</p>
                 </div>
             </div>
         </div>
@@ -288,7 +291,8 @@
 <!-- end couter  -->
 <!-- video  -->
 <section class="video">
-    <iframe src="https://www.youtube.com/embed/HAT_iwMTWbs" title="YouTube video player" frameborder="0"
+
+    <iframe src="https://www.youtube.com/embed/hQ0n9gxAAmc" title="YouTube video player" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
 </section>
@@ -298,7 +302,7 @@
 <!-- hotel  -->
 <section class="hotel">
     <div class="special-title">
-        Insde our hotel
+        Bên trong khách sạn
     </div>
     <div class="slick-hotel">
         <div class="hotel-content">
@@ -306,10 +310,9 @@
                 <img src="{{ asset('public/hotel/images/hotel-02.jpeg') }}" alt="">
             </div>
             <div class="hotel-text">
-                <div class="hotel-text-tittle">Restaurant</div>
+                <div class="hotel-text-tittle">Nhà hàng</div>
                 <p>
-                    02 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum egestas tellus
-                    et viverra. Vestibulum euismod lacus eget nisi ornare 02.
+                    Nơi phục vụ cho quý khách những món ăn ngon nhất, từ những đầu bếp chuyên nghiệp.
                 </p>
             </div>
         </div>
@@ -318,10 +321,9 @@
                 <img src="{{ asset('public/hotel/images/hotel-02.jpeg') }}" alt="">
             </div>
             <div class="hotel-text">
-                <div class="hotel-text-tittle">Ultimate Swimming Pool</div>
+                <div class="hotel-text-tittle">Bể bơi vô cực</div>
                 <p>
-                    02 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum egestas tellus
-                    et viverra. Vestibulum euismod lacus eget nisi ornare 02.
+                    Đem lại một trải nghiệm tuyệt vời. Quý khách sẽ được thư giãn với bể bơi có view nhìn ra thiên nhiên.
                 </p>
             </div>
         </div>
@@ -331,7 +333,7 @@
 
 <!-- review  -->
 <section class="review">
-    <div class="review-title">Review</div>
+    <div class="review-title">Đánh giá</div>
     <div class="slick-review">
         <div class="review-content">
             <div class="review-content-img">
@@ -339,13 +341,12 @@
             </div>
             <div class="review-content-desc">
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum egestas tellus et
-                    viverra. Vestibulum euismod lacus eget nisi ornare, id laoreet tortor dapibus.
+                    Khách sạn phục vụ chuyện nghiệp, giá thành hợp lý.
                 </p>
             </div>
             <div class="review-content-job">
-                <p>Robin</p>
-                <p>CEO, Info Net</p>
+                <p>Hưng</p>
+                <p>Hà Nội</p>
             </div>
         </div>
 
@@ -355,13 +356,12 @@
             </div>
             <div class="review-content-desc">
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum egestas tellus et
-                    viverra. Vestibulum euismod lacus eget nisi ornare, id laoreet tortor dapibus.
+                    Khách sạn có những dịch vụ thật tuyệt vời.
                 </p>
             </div>
             <div class="review-content-job">
-                <p>Robin</p>
-                <p>CEO, Info Net</p>
+                <p>Thành</p>
+                <p>HCM</p>
             </div>
         </div>
         <div class="review-content">
@@ -370,13 +370,12 @@
             </div>
             <div class="review-content-desc">
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum egestas tellus et
-                    viverra. Vestibulum euismod lacus eget nisi ornare, id laoreet tortor dapibus.
+                    Phục vụ có quy trình và chuyên nghiệp. Phòng rất đẹp, đầy đủ tiện nghi.
                 </p>
             </div>
             <div class="review-content-job">
-                <p>Robin</p>
-                <p>CEO, Info Net</p>
+                <p>Hiếu</p>
+                <p>HN</p>
             </div>
         </div>
 
@@ -427,10 +426,7 @@
 @section('js')
 
 <script>
-    
-
-
-$(document).ready(function() {
+    $(document).ready(function() {
     function increment(elem, finalVal) {
     var currVal = parseInt(document.getElementById(elem).innerHTML, 10);
     if (currVal < finalVal) {

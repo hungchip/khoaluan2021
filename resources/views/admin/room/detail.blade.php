@@ -22,7 +22,12 @@
                     </div>
                     <div class="col-sm-6">
                         <h4 class=" mb-2 text-dark">Giá</h4>
-                        <p> {{number_format($roomType->room_type_price)}}</p>
+                        <p> {{$roomType->room_type_price}}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 class=" mb-2 text-dark">Số lượng
+                        </h4>
+                        <p> {{$roomType->room_type_amount}}</p>
                     </div>
                     <div class="col-sm-12">
                         <h4 class=" mb-2 text-dark">Mô tả ngắn</h4>

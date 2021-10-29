@@ -19,6 +19,7 @@ class RoomType extends Model
         'room_type_child',
         'avatar',
         'list_image',
+        'room_type_amount',
     ];
 
     public function rooms()

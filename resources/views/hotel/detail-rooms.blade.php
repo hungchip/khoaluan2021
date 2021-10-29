@@ -49,7 +49,7 @@
                         <p>Price:</p>
                         <strong>{{number_format($roomType->room_type_price)}} VNĐ</strong>
                     </div>
-                    <a href=""><button>BOOK NOW</button></a>
+                    <a href="{{route('showStepOne')}}"><button>BOOK NOW</button></a>
                 </div>
 
             </div>

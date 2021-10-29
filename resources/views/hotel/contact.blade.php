@@ -4,7 +4,7 @@
 <!-- banner  -->
 <section class="banner">
     <div class="intro text-center">
-        <p class="intro-top">Contact Us</p>
+        <p class="intro-top">Liên hệ với chúng tôi</p>
     </div>
 </section>
 
@@ -26,24 +26,24 @@
                     <div class="confirm-form">
                         <form action="" method="post">
                             <div class="confirm-list">
-                                <label for="name">Name <span>*</span></label>
-                                <input type="text" id="name" placeholder="Your name">
+                                <label for="name">Tên <span>*</span></label>
+                                <input type="text" id="name" placeholder="Tên của bạn">
                             </div>
                             <div class="confirm-list">
                                 <label for="email">Email <span>*</span></label>
-                                <input type="email" id="email" placeholder="Your email">
+                                <input type="email" id="email" placeholder="Email của bạn">
                             </div>
                             <div class="confirm-list">
-                                <label for="phone">Phone <span>*</span></label>
-                                <input type="number" id="phone" placeholder="Your phone">
+                                <label for="phone">Điện thoại <span>*</span></label>
+                                <input type="number" id="phone" placeholder="Số điện thoại của bạn">
                             </div>
                             <div class="confirm-list">
-                                <label for="message">Message</label>
+                                <label for="message">Lời nhắn</label>
                                 <textarea name="" id="message" rows="3"></textarea>
                             </div>
                             <div class="confirm-list">
                                 <label for="submit"></label>
-                                <button type="submit">SUBMIT</button>
+                                <button type="submit">Gửi</button>
                             </div>
                         </form>
                     </div>

@@ -1,11 +1,46 @@
-<div class="booking-side">
-    <div class="booking-side-1">
+@extends('hotel.booking')
+
+@section('form-booking')
+
+
+<div class="booking-step">
+    <div class="booking-step-title ">
+        1. <span>Chọn ngày</span>
+    </div>
+    <div class="booking-step-title current">
+        2. <span>Chọn phòng</span>
+    </div>
+    <div class="booking-step-title ">
+        3. <span>Chọn phương thức thanh toán</span>
+    </div>
+    <div class="booking-step-title ">
+        4. <span>Hoàn tất</span>
+    </div>
+</div>
+<form action="{{route('showStepTwo')}}">
+    <input type="hidden" name="t_start" value="{{$arr['t_start']}}">
+    <input type="hidden" name="t_end" value="{{$arr['t_end']}}">
+    <input type="hidden" name="room_adult" value="{{$arr['room_adult']}}">
+    <input type="hidden" name="room_child" value="{{$arr['room_child']}}">
+    <div class="booking-side">
         <h4 class="sb-title">Your Reservation</h4>
         <ul>
-            <li><span>Check In: </span>02/04/1998</li>
-            <li><span>Check Out: </span>02/04/1998</li>
+            <li><span>Check In: </span>{{date('d/m/Y', strtotime($arr['t_start']))}}</li>
+            <li><span>Check Out: </span>{{date('d/m/Y', strtotime($arr['t_end']))}}</li>
         </ul>
-        <h4 class="sb-title">Room 1 of 2
+        {{-- <h4 class="sb-title">Room 1 of 2
+            <a href="" class="btn btn-edit">edit</a>
+        </h4> --}}
+        <ul>
+            <li><span>Room: </span>{{$roomType->room_type_name}}</li>
+            <li><span>Guest: </span>
+                <span class="guest-wrapper">
+                    <span>Adult {{$arr['room_adult']}}</span>,
+                    <span> Child {{$arr['room_child']}}</span>
+                </span>
+            </li>
+        </ul>
+        {{-- <h4 class="sb-title">Room 2 of 2
             <a href="" class="btn btn-edit">edit</a>
         </h4>
         <ul>
@@ -16,36 +51,44 @@
                     <span> Child 1</span>
                 </span>
             </li>
-        </ul>
-        <h4 class="sb-title">Room 2 of 2
-            <a href="" class="btn btn-edit">edit</a>
-        </h4>
-        <ul>
-            <li><span>Room:</span> Standard Room</li>
-            <li><span>Guest: </span>
-                <span class="guest-wrapper">
-                    <span>Adult 2</span>,
-                    <span> Child 1</span>
-                </span>
-            </li>
-        </ul>
+        </ul> --}}
         <button>Edit Room & Guest Quantity</button>
     </div>
-</div>
+</form>
 <div class="booking-main">
-    <div class="booking-main-1">
+    <form action="{{route('showStepFour')}}">
+        <input type="hidden" name="t_start" value="{{$arr['t_start']}}">
+        <input type="hidden" name="t_end" value="{{$arr['t_end']}}">
+        <input type="hidden" name="room_adult" value="{{$arr['room_adult']}}">
+        <input type="hidden" name="room_child" value="{{$arr['room_child']}}">
+        <input type="hidden" name="room_type_id" value="{{$roomType->room_type_id}}">
         <div class="booking-service">
-            <input type="checkbox">
-            <label for="">Breakfast <span>(free)</span></label>
+            <input type="checkbox" name="service1" value="breakfast" id="breakfast">
+            <label for="breakfast">Breakfast<span>(free)</span></label>
         </div>
         <div class="booking-service">
-            <input type="checkbox">
-            <label for="">Breakfast <span>(free)</span></label>
+            <input type="checkbox" name="service2" value="clean" id="clean">
+            <label for="clean">Daily Clean Up<span>(free)</span></label>
         </div>
         <div class="booking-service">
-            <input type="checkbox">
-            <label for="">Breakfast <span>(free)</span></label>
+            <input type="checkbox" name="service3" value="shuttle" id="shuttle">
+            <label for="shuttle">Shuttle<span>(free)</span></label>
         </div>
         <button>Continue to payment</button>
-    </div>
+    </form>
 </div>
+<div class="clearfix">
+
+</div>
+
+
+@endsection
+
+@section('css')
+<style>
+    .booking-service {
+        display: flex;
+        align-items: center;
+    }
+</style>
+@endsection

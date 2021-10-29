@@ -90,7 +90,7 @@
             <div class="sidebar-heading">
                 Khách sạn
             </div>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdminRoom"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-bed"></i>
@@ -99,12 +99,12 @@
                 <div id="collapseAdminRoom" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
+                        <h6 class="collapse-header">Custom Utilities:</h6>
                         <a class="collapse-item" href="">Sơ đồ phòng</a>
                         <a class="collapse-item" href="">Đặt phòng</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             <!-- bài viết  -->
             <li class="nav-item">
                 <a class="nav-link" href="{{route('roomType.index')}}">
@@ -112,7 +112,7 @@
                     <span>Loại phòng</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{route('room.index')}}">
                     <i class="far fa-newspaper"></i>
                     <span>Phòng</span></a>
             </li>
@@ -121,11 +121,11 @@
                     <i class="far fa-newspaper"></i>
                     <span>Dịch vụ</span></a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="">
                     <i class="far fa-newspaper"></i>
                     <span>Bài viết</span></a>
-            </li>
+            </li> --}}
             {{-- media  --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{route('gallerys.index')}}">
@@ -140,7 +140,7 @@
             </li>
             
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -156,17 +156,17 @@
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            {{-- <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
                 Cấu hình
-            </div>
+            </div> --}}
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -184,7 +184,7 @@
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
             <!-- Nav Item - Pages Collapse Menu -->
             {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -207,7 +207,7 @@
             </li> --}}
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
@@ -226,7 +226,7 @@
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            </div> --}}
 
             <!-- Sidebar Message -->
             {{-- <div class="sidebar-card">
@@ -272,7 +272,7 @@
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
+                        {{-- <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
@@ -412,7 +412,7 @@
                             </div>
                         </li>
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <div class="topbar-divider d-none d-sm-block"></div> --}}
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">

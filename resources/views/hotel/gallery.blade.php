@@ -4,7 +4,7 @@
 <!-- banner  -->
 <section class="banner">
     <div class="intro text-center">
-        <p class="intro-top">Gallery</p>
+        <p class="intro-top">Bộ sưu tập</p>
     </div>
 </section>
 

@@ -141,7 +141,7 @@ $(document).ready(function() {
     // $('.t-datepicker').tDatePicker('show');
 
     // custome select option
-    $('select').each(function() {
+    $('.cus-select').each(function() {
         var $this = $(this),
             numberOfOptions = $(this).children('option').length;
 
@@ -193,4 +193,17 @@ $(document).ready(function() {
         autoClose: false,
     });
     // $('.datepicker-2').tDatePicker('show');
+    //thêm nhiều phòng
+    $('#select_room_amount').on('change', function() {
+        var amount = $(this).val();
+        var roomItem = document.getElementsByClassName('room-item');
+        for (let i = 0; i < roomItem.length; i++) {
+            if (i < amount) {
+                roomItem[i].style.display = 'flex';
+            } else {
+                roomItem[i].style.display = 'none';
+            }
+        }
+    });
+
 });

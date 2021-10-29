@@ -4,7 +4,7 @@
 <!-- banner  -->
 <section class="banner">
     <div class="intro text-center">
-        <p class="intro-top">Rooms</p>
+        <p class="intro-top">Các loại phòng</p>
     </div>
 </section>
 
@@ -15,9 +15,9 @@
     <div class="container">
         <div class="over-view">
             <p>
-                223 rooms and suites from standard to premium levels are set up harmonizingly within the hotel area. All
-                rooms feature exclusive facilities, airy space and romantic balcony offering views of magnificent
-                natural scenery of the Tay Bac region.
+                Tất cả các phòng từ tiêu chuẩn đến cao cấp được bố trí hài hòa trong khuôn viên khách sạn. Bên trong
+                các phòng đều có tiện nghi độc quyền, không gian thoáng mát và ban công thơ mộng nhìn ra khung cảnh
+                thiên nhiên hùng vĩ của vùng Tây Bắc.
             </p>
         </div>
         <div class="rooms">
@@ -41,9 +41,9 @@
                         </div>
                     </div>
                     <div class="room-price">
-                        <p>Price <span>{{number_format($roomType->room_type_price)}}</span> VND/Day</p>
+                        <p>Giá: <span>{{number_format($roomType->room_type_price)}}</span> VND/Ngày</p>
                         <a href="">
-                            <button>Book now</button>
+                            <button>Đặt phòng ngay</button>
                         </a>
                     </div>
                 </div>
@@ -56,10 +56,10 @@
 @endsection
 
 @section('css')
-    <style>
-        .banner {
-            background-image: url('{{asset('public/hotel/images/room-banner.jpeg')}}');
+<style>
+    .banner {
+        background-image: url('{{asset('public/hotel/images/room-banner.jpeg')}}');
         height: 400px;
-        }
-    </style>
+    }
+</style>
 @endsection

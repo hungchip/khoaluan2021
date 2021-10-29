@@ -23,6 +23,7 @@ class CreateRoomTypesTable extends Migration
             $table->integer('room_type_adult')->default(1);
             $table->integer('room_type_child')->default(1);
             $table->string('avatar');
+            $table->integer('room_type_amount')->default(0);
             // $table->string('list_image');
             $table->timestamps();
         });

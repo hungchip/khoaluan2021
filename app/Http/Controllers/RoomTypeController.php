@@ -192,6 +192,7 @@ class RoomTypeController extends Controller
         $roomType->quote = $request->quote;
         $roomType->room_type_adult = $request->adult;
         $roomType->room_type_child = $request->child;
+        $roomType->room_type_amount = $request->amount;
 
         if ($request->file('avatar')) {
             $path = 'public/image/' . $roomType->avatar;

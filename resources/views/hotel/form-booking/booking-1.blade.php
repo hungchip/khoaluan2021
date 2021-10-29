@@ -1,24 +1,36 @@
-<!-- booking side -->
-<div class="booking-side ">
-    <div class="booking-side-1">
+@extends('hotel.booking')
+
+@section('form-booking')
+{{-- <form action="{{route('showStepThree')}}"> --}}
+    <div class="booking-step">
+        <div class="booking-step-title ">
+            1. <span>Chọn ngày</span>
+        </div>
+        <div class="booking-step-title current">
+            2. <span>Chọn phòng</span>
+        </div>
+        <div class="booking-step-title ">
+            3. <span>Chọn phương thức thanh toán</span>
+        </div>
+        <div class="booking-step-title ">
+            4. <span>Hoàn tất</span>
+        </div>
+    </div>
+    <div class="booking-side">
         <h4 class="sb-title">Your Reservation</h4>
         <ul>
-            <li><span>Check In: </span>{{$arr[2]}}</li>
-            <li><span>Check Out: </span>{{$arr[3]}}</li>
-            <input type="hidden" name="check_in" value="{{$arr[2]}}">
-            <input type="hidden" name="check_out" value="{{$arr[3]}}">
+            <li><span>Check In: </span>{{date('d/m/Y', strtotime($arr['t_start']))}}</li>
+            <li><span>Check Out: </span>{{date('d/m/Y', strtotime($arr['t_end']))}}</li>
         </ul>
-        <h4 class="sb-title">
+        {{-- <h4 class="sb-title">Room 1 of 2
             <a href="" class="btn btn-edit">edit</a>
-        </h4>
+        </h4> --}}
         <ul>
             <li><span>Room:</span></li>
             <li><span>Guest: </span>
                 <span class="guest-wrapper">
-                    <span>Adult {{$arr[0]}}</span>,
-                    <span> Child {{$arr[1]}}</span>
-                    <input type="hidden" name="adult" value="{{$arr[0]}}">
-                    <input type="hidden" name="child" value="{{$arr[1]}}">
+                    <span>Adult {{$arr['room_adult']}}</span>,
+                    <span> Child {{$arr['room_child']}}</span>
                 </span>
             </li>
         </ul>
@@ -34,35 +46,52 @@
                 </span>
             </li>
         </ul> --}}
-        {{-- <button id="btn-edit-room">Edit Room & Guest Quantity</button> --}}
+        <a href="{{route('showStepOne')}}"><button>Edit Room & Guest Quantity</button></a>
     </div>
-</div>
-<!-- booking main -->
-<div class="booking-main">
-    <div class="booking-main-1">
+    <div class="booking-main">
         <div class="list-booking-room">
+
+
             @foreach($roomTypes as $roomType)
-            <div class="booking-room-warraper">
-                <div class="booking-room-image"><img src="{{asset('public/image/')}}/{{$roomType->avatar}}" alt="">
-                </div>
-                <div class="booking-room-content">
-                    <h4>
-                        <a href="{{route('showDetailRoom',$roomType->room_type_id)}}">{{$roomType->room_type_name}}</a>
-                    </h4>
-                    {{-- <ul>
-                        <li><span>Max Occupancy: </span> 2 Persons</li>
-                        <li><span>Size: </span> 35-40sqm</li>
-                        <li><span>View: </span>City</li>
-                    </ul> --}}
-                    {!!$roomType->room_type_info!!}
-                    <div class="booking-room-action">
-                        <button id="vuviethugn" class="btn-select vuviethugn">Select room</button>
-                        <div class="price"><span>price</span> {{number_format($roomType->room_type_price)}} VND</div>
+
+            <form action="{{route('showStepThree')}}">
+                <input type="hidden" name="t_start" value="{{$arr['t_start']}}">
+                <input type="hidden" name="t_end" value="{{$arr['t_end']}}">
+                <input type="hidden" name="room_adult" value="{{$arr['room_adult']}}">
+                <input type="hidden" name="room_child" value="{{$arr['room_child']}}">
+                <input type="hidden" name="room_type_id" value="{{$roomType->room_type_id}}">
+                <div class="booking-room-warraper">
+                    <div class="booking-room-image"><img src="{{asset('public/image')}}/{{$roomType->avatar}}" alt="">
+                    </div>
+                    <div class="booking-room-content">
+                        <h4>
+                            <a href="{{route('showDetailRoom',$roomType->room_type_id)}}">{{$roomType->room_type_name}}</a>
+                        </h4>
+                        {!!$roomType->room_type_info!!}
+                        <div class="booking-room-action">
+                            <button class="btn-select btn-{{$roomType->room_type_id}}">Select room</button>
+                            <div class="price"><span>price</span> {{number_format($roomType->room_type_price) }} VND
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <input type="hidden" name="room_type" value="{{$roomType->room_type_id}}">
-            </div>
+            </form>
             @endforeach
         </div>
     </div>
-</div>
+    <div class="clearfix">
+
+    </div>
+
+    {{--
+</form> --}}
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function() {
+    var listBtn = document.getElementsByClassName('btn-select');
+    console.log(listBtn);
+});
+</script>
+@endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -13,8 +14,8 @@ class RoomController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
+    {$rooms = Room::all();
+        return view('admin.room.index', compact('rooms'));
     }
 
     /**
@@ -24,7 +25,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        $roomTypes = RoomType::all();
+        return view('admin.room.create', compact('roomTypes'));
     }
 
     /**
@@ -35,7 +37,17 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $roomType = RoomType::find($request->roomType);
+        $roomType->room_type_amount++;
+        $roomType->save();
+
+        for ($i = 0; $i < $request->amount; $i++) {
+            $room = new Room();
+            $room->room_type_id = $request->roomType;
+            $room->save();
+        }
+
+        return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Thêm mới thành công!!!']);
     }
 
     /**
@@ -69,7 +81,7 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        //
+
     }
 
     /**
@@ -78,8 +90,17 @@ class RoomController extends Controller
      * @param  \App\Models\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Room $room)
+    public function destroy($id)
     {
-        //
+        $room = Room::find($id);
+        $roomType = RoomType::find($room->room_type_id);
+        if ($roomType->room_type_amount > 1) {
+            $roomType->room_type_amount--;
+            $roomType->save();
+        } else {
+            $roomType->destroy($room->room_type_id);
+        }
+        $room->delete();
+        return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Xóa thành công!!!']);
     }
 }
