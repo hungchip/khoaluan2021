@@ -17,24 +17,25 @@
         </div>
     </div>
     <div class="booking-side">
-        <h4 class="sb-title">Your Reservation</h4>
+        <h4 class="sb-title">Đặt phòng</h4>
         <ul>
             <li><span>Check In: </span>{{date('d/m/Y', strtotime($arr['t_start']))}}</li>
             <li><span>Check Out: </span>{{date('d/m/Y', strtotime($arr['t_end']))}}</li>
         </ul>
-        @for($i = 0; $i < $roomAmount; $i++) <h4 class="sb-title">Room {{$i + 1}} of {{$roomAmount}}
+        @for($i = 0; $i < $roomAmount; $i++)
+        <h4 class="sb-title">Phòng {{$i + 1}} / {{$roomAmount}}
             {{-- <a href="" class="btn btn-edit">edit</a> --}}
-            </h4>
-            <ul>
-                <li><span>Room: {{$roomType->room_type_name}}</span></li>
-                <li><span>Guest: </span>
-                    <span class="guest-wrapper">
-                        <span>Adult {{$roomAdult[$i]}}</span>,
-                        <span> Child {{$roomChild[$i]}}</span>
-                    </span>
-                </li>
-            </ul>
-            @endfor
+        </h4>
+        <ul>
+            <li><span>Loại phòng: </span></li>
+            <li><span>Khách: </span>
+                <span class="guest-wrapper">
+                    <span>Người lớn {{$roomAdult[$i]}}</span>,
+                    <span> Trẻ em {{$roomChild[$i]}}</span>
+                </span>
+            </li>
+        </ul>
+        @endfor
         {{-- <h4 class="sb-title">Room 2 of 2</h4>
         <ul>
             <li><span>Room:</span> Standard Room</li>
@@ -62,7 +63,7 @@
         <!-- <button>Edit Booking</button> -->
     </div>
     <div class="booking-main">
-        <h4 class="sb-title">Reservation Complete</h4>
+        <h4 class="sb-title">Đặt phòng hoàn tất</h4>
         <p>Thank you for booking</p>
     </div>
     <div class="clearfix">

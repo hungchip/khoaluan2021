@@ -23,23 +23,25 @@
     <input type="hidden" name="room_adult" value="{{$arr['room_adult']}}">
     <input type="hidden" name="room_child" value="{{$arr['room_child']}}">
     <div class="booking-side">
-        <h4 class="sb-title">Your Reservation</h4>
+        <h4 class="sb-title">Đặt phòng</h4>
         <ul>
             <li><span>Check In: </span>{{date('d/m/Y', strtotime($arr['t_start']))}}</li>
             <li><span>Check Out: </span>{{date('d/m/Y', strtotime($arr['t_end']))}}</li>
         </ul>
-        {{-- <h4 class="sb-title">Room 1 of 2
-            <a href="" class="btn btn-edit">edit</a>
-        </h4> --}}
+        @for($i = 0; $i < $roomAmount; $i++)
+        <h4 class="sb-title">Phòng {{$i + 1}} / {{$roomAmount}}
+            {{-- <a href="" class="btn btn-edit">edit</a> --}}
+        </h4>
         <ul>
-            <li><span>Room: </span>{{$roomType->room_type_name}}</li>
-            <li><span>Guest: </span>
+            <li><span>Loại phòng: </span></li>
+            <li><span>Khách: </span>
                 <span class="guest-wrapper">
-                    <span>Adult {{$arr['room_adult']}}</span>,
-                    <span> Child {{$arr['room_child']}}</span>
+                    <span>Người lớn {{$roomAdult[$i]}}</span>,
+                    <span> Trẻ em {{$roomChild[$i]}}</span>
                 </span>
             </li>
         </ul>
+        @endfor
         {{-- <h4 class="sb-title">Room 2 of 2
             <a href="" class="btn btn-edit">edit</a>
         </h4>

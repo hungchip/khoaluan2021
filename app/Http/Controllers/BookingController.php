@@ -52,9 +52,11 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function show(Booking $booking)
+    public function show($id)
     {
-        //
+        $bookingDetails = BookingDetail::where('booking_id',$id)->get();
+        // dd($bookingDetails);
+        return view('admin.booking.detail',compact('bookingDetails'));
     }
 
     /**
@@ -191,14 +193,14 @@ class BookingController extends Controller
         $arr['t_end'] = $request->t_end;
         $roomAdult = $request->room_adult;
         $roomChild = $request->room_child;
-        $this->createBooking($arr);
+        $this->createBooking($arr, $roomAdult, $roomChild);
         // $roomType = RoomType::find($request->room_type_id);
         $roomType = RoomType::where('room_type_id', $request->room_type_id)->first();
 
         return view('hotel.form-booking.booking-4', compact('arr', 'roomType', 'roomAmount', 'roomAdult', 'roomChild'));
     }
 
-    public function createBooking(array $arr)
+    public function createBooking(array $arr, $roomAdult, $roomChild)
     {
         $guest = new Guest();
         // $guest->create($arr);
@@ -213,12 +215,15 @@ class BookingController extends Controller
         $booking->checkin = $arr['checkin'];
         $booking->checkout = $arr['checkout'];
         $booking->save();
-
-        $bookingDetail = new BookingDetail();
-        $bookingDetail->booking_id = $booking->booking_id;
-        $bookingDetail->room_type_id = $arr['room_type_id'];
-        $bookingDetail->amount = $arr['room_amount'];
-        $bookingDetail->save();
+        for($i = 0; $i < $arr['room_amount']; $i++){
+            $bookingDetail = new BookingDetail();
+            $bookingDetail->booking_id = $booking->booking_id;
+            $bookingDetail->roomAdult = $roomAdult[$i];
+            $bookingDetail->roomChild = $roomChild[$i];
+            $bookingDetail->room_type_id = $arr['room_type_id'];
+            $bookingDetail->amount = $arr['room_amount'];
+            $bookingDetail->save();
+        }
     }
 
     public function checkAvailableRoom($start, $end, $adult, $child)

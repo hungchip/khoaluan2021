@@ -13,13 +13,13 @@ class Booking extends Model
         'room_id', 'guest_id','checkin', 'checkout',
     ];
 
-    // public function rooms()
-    // {
-    //     return $this->hasMany('App\Models\Room', 'booking_id');
-    // }
+    public function bookingDetails()
+    {
+        return $this->hasMany('App\Models\BookingDetail', 'booking_id');
+    }
 
     public function guest()
     {
-        return $this->belongsTo('App\Models\Room', 'booking_id');
+        return $this->belongsTo('App\Models\Guest', 'guest_id');
     }
 }

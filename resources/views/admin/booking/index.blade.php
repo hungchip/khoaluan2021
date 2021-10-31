@@ -38,7 +38,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Danh sách các dịch vụ</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách các đặt phòng</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -46,7 +46,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Mã khách hàng</th>
+                        <th>Tên khách hàng</th>
                         <th>Ngày tạo</th>
                         <th>Ngày đến</th>
                         <th>Ngày đi</th>
@@ -56,7 +56,7 @@
                 <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Mã khách hàng</th>
+                        <th>Tên khách hàng</th>
                         <th>Ngày tạo</th>
                         <th>Ngày đến</th>
                         <th>Ngày đi</th>
@@ -67,7 +67,7 @@
                     @foreach($bookings as $booking)
                     <tr>
                         <td>{{$booking->booking_id}}</td>
-                        <td>{{$booking->guest_id}}</td>
+                        <td>{{$booking->guest->guest_name}}</td>
                         <td>{{$booking->created_at}}</td>
                         <td>{{date('d/m/y', strtotime($booking->checkin))}}</td>
                         <td>{{date('d/m/y', strtotime($booking->checkout))}}</td>
@@ -81,7 +81,7 @@
                                     <i class="fas fa-info"></i>
                                 </a>
                                 <a href="{{route('booking.edit',$booking->booking_id)}}"
-                                    class="btn btn-warning btn-circle btn-sm" title="Chỉnh sửa">
+                                    class="btn btn-warning btn-circle btn-sm" title="In phiếu giao">
                                     <i class="fas fa-user-edit"></i>
                                 </a>
                                 <button class="btn btn-danger btn-circle btn-sm" title="Xóa">

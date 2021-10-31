@@ -1129,8 +1129,8 @@ input {
     height: 40px;
 }
 
-.field-half:nth-child(even) {
-    margin-right: 15px;
+.field-half:nth-child(odd) {
+    margin-right: 30px;
 }
 
 .sb-title,

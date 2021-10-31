@@ -20,6 +20,6 @@ class BookingDetail extends Model
 
     public function roomTypes()
     {
-        return $this->hasMany('App\Models\RoomType', 'room_type_id');
+        return $this->hasOne('App\Models\RoomType', 'room_type_id');
     }
 }
