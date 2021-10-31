@@ -77,7 +77,7 @@
                         {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
                         <a class="collapse-item" href="{{route('showListAdmin')}}">Quản trị viên</a>
                         <a class="collapse-item" href="">Phân quyền</a>
-                        <a class="collapse-item" href="">Khách sạn</a>
+                        <a class="collapse-item" href="{{route('booking.index')}}">Đặt phòng</a>
                         {{-- <a class="collapse-item" href="utilities-border.html">Borders</a> --}}
                         {{-- <a class="collapse-item" href="utilities-animation.html">Animations</a> --}}
                         {{-- <a class="collapse-item" href="utilities-other.html">Other</a> --}}

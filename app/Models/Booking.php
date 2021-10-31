@@ -10,13 +10,13 @@ class Booking extends Model
     protected $primaryKey = 'booking_id';
 
     protected $fields = [
-        'room_id', 'guest_id', 'order_id', 'booking_adult', 'booking_child', 'checkin', 'checkout', 'booking_note',
+        'room_id', 'guest_id','checkin', 'checkout',
     ];
 
-    public function rooms()
-    {
-        return $this->hasMany('App\Models\Room', 'booking_id');
-    }
+    // public function rooms()
+    // {
+    //     return $this->hasMany('App\Models\Room', 'booking_id');
+    // }
 
     public function guest()
     {

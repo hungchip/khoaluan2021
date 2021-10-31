@@ -238,7 +238,8 @@ class RoomTypeController extends Controller
      */
     public function destroy($id)
     {
-        
+        $room = RoomType::all();
+        $room->delete();
         $roomType = RoomType::find($id);
         $listImages = ListImage::where('room_type_id', $roomType->room_type_id)->get();
         foreach ($listImages as $image) {

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\BookingDetail;
+use App\Models\Guest;
 use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
@@ -16,7 +18,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = Booking::all();
+        return view('admin.booking.index', compact('bookings'));
     }
 
     /**
@@ -24,9 +27,12 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($guest_id, $checkin, $checkout)
     {
-        //
+        $this->guest_id = $guest_id;
+        $this->checkin = $checkin;
+        $this->checkout = $checkout;
+        $this->save();
     }
 
     /**
@@ -111,91 +117,108 @@ class BookingController extends Controller
 
     public function showStepTwo(Request $request)
     {
-        dd($request->room_adult_);
+        // dd($request->room_adult_);
         $arr = [];
         // $arr[]= $request->room_amount;
-        $arr['room_adult'] = $request->room_adult;
-        $arr['room_child'] = $request->room_child;
+        // $arr['room_adult'] = $request->room_adult;
+        // $arr['room_child'] = $request->room_child;
+        $roomAdult = $request->room_adult;
+        $roomChild = $request->room_child;
         $arr['t_start'] = $request->t_start;
         $arr['t_end'] = $request->t_end;
-        // $roomTypes = RoomType::where('room_type_id', 1)->get();
         $roomTypes = RoomType::all();
-        $rooms = Room::where('room_status', 0)->get();
-
-        $start = strtotime($arr['t_start']);
-        $end = strtotime($arr['t_end']);
-        // dd($start < $end);
-        return view('hotel.form-booking.booking-1', compact('arr', 'roomTypes'));
+        // $rooms = Room::where('room_status', 0)->get();
+        $roomAmount = $request->room_amount;
+        // $start = strtotime($arr['t_start']);
+        // $end = strtotime($arr['t_end']);
+        // $count = 0;
+        return view('hotel.form-booking.booking-1', compact('arr', 'roomTypes', 'roomAmount', 'roomAdult', 'roomChild', 'count'));
     }
 
-    public function showStepThree(Request $request)
-    {
-        $arr = [];
-        $arr['room_adult'] = $request->room_adult;
-        $arr['room_child'] = $request->room_child;
-        $arr['t_start'] = $request->t_start;
-        $arr['t_end'] = $request->t_end;
-        // $roomType = RoomType::find($request->room_type_id);
-        $roomType = RoomType::where('room_type_id', $request->room_type_id)->first();
-        return view('hotel.form-booking.booking-2', compact('arr', 'roomType'));
-    }
+    // public function showStepThree(Request $request)
+    // {
+    //     $arr = [];
+    //     $arr['room_adult'] = $request->room_adult;
+    //     $arr['room_child'] = $request->room_child;
+    //     $arr['t_start'] = $request->t_start;
+    //     $arr['t_end'] = $request->t_end;
+    //     // $roomType = RoomType::find($request->room_type_id);
+    //     $roomType = RoomType::where('room_type_id', $request->room_type_id)->first();
+    //     return view('hotel.form-booking.booking-2', compact('arr', 'roomType'));
+    // }
 
     public function showStepFour(Request $request)
     {
+        // dd($request->room_amount);
         $arr = [];
-        $arr['room_adult'] = $request->room_adult;
-        $arr['room_child'] = $request->room_child;
+        $roomAdult = $request->room_adult;
+        $roomChild = $request->room_child;
         $arr['t_start'] = $request->t_start;
         $arr['t_end'] = $request->t_end;
-        $arr['breakfast'] = $request->service1;
-        $arr['clean'] = $request->service2;
-        $arr['shuttle'] = $request->service3;
+        $roomAmount = $request->room_amount;
+        // $arr['breakfast'] = $request->service1;
+        // $arr['clean'] = $request->service2;
+        // $arr['shuttle'] = $request->service3;
         // $roomType = RoomType::find($request->room_type_id);
         $roomType = RoomType::where('room_type_id', $request->room_type_id)->first();
-        return view('hotel.form-booking.booking-3', compact('arr', 'roomType'));
+        return view('hotel.form-booking.booking-3', compact('arr', 'roomType', 'roomAmount', 'roomAdult', 'roomChild'));
     }
 
     public function showFinalStep(Request $request)
     {
         $request->validate(
             [
-                'firstName' => 'required',
-                'lastName' => 'required',
+                'name' => 'required',
+                'address' => 'required',
                 'email' => 'required',
                 'phone' => 'required',
+                'paymentMethod' => 'required',
             ],
             [
 
             ]);
         $arr = [];
-        $arr['room_adult'] = $request->room_adult;
-        $arr['room_child'] = $request->room_child;
+        $arr['name'] = $request->name;
+        $arr['email'] = $request->email;
+        $arr['address'] = $request->address;
+        $arr['phone'] = $request->phone;
+        $arr['room_amount'] = $request->room_amount;
+        $roomAmount = $request->room_amount;
+        $arr['checkin'] = $request->t_start;
+        $arr['checkout'] = $request->t_end;
+        $arr['room_type_id'] = $request->room_type_id;
         $arr['t_start'] = $request->t_start;
         $arr['t_end'] = $request->t_end;
-        $arr['breakfast'] = $request->service1;
-        $arr['clean'] = $request->service2;
-        $arr['shuttle'] = $request->service3;
-        $arr['shuttle'] = $request->service3;
-        $arr['name'] = $request->name;
-        $arr['address'] = $request->address;
-        $arr['email'] = $request->email;
-        $arr['phone'] = $request->phone;
-        $arr['coupon'] = $request->coupon;
+        $roomAdult = $request->room_adult;
+        $roomChild = $request->room_child;
+        $this->createBooking($arr);
         // $roomType = RoomType::find($request->room_type_id);
         $roomType = RoomType::where('room_type_id', $request->room_type_id)->first();
 
-        return view('hotel.form-booking.booking-4', compact('arr', 'roomType'));
+        return view('hotel.form-booking.booking-4', compact('arr', 'roomType', 'roomAmount', 'roomAdult', 'roomChild'));
     }
 
     public function createBooking(array $arr)
     {
+        $guest = new Guest();
+        // $guest->create($arr);
+        $guest->guest_name = $arr['name'];
+        $guest->guest_email = $arr['email'];
+        $guest->guest_address = $arr['address'];
+        $guest->guest_phone = $arr['phone'];
+        $guest->save();
+        
         $booking = new Booking();
-        $booking->room_type_id = $arr['room_type_id'];
-        $booking->booking_adult = $arr['room_adult'];
-        $booking->booking_child = $arr['room_child'];
-        $booking->checkin = $arr['t_start'];
-        $booking->checkout = $arr['t_end'];
+        $booking->guest_id = $guest->guest_id;
+        $booking->checkin = $arr['checkin'];
+        $booking->checkout = $arr['checkout'];
         $booking->save();
+
+        $bookingDetail = new BookingDetail();
+        $bookingDetail->booking_id = $booking->booking_id;
+        $bookingDetail->room_type_id = $arr['room_type_id'];
+        $bookingDetail->amount = $arr['room_amount'];
+        $bookingDetail->save();
     }
 
     public function checkAvailableRoom($start, $end, $adult, $child)

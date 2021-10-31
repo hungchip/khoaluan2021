@@ -15,11 +15,11 @@ class CreateGuestsTable extends Migration
     {
         Schema::create('hc_guests', function (Blueprint $table) {
             $table->increments('guest_id');
-            $table->string('guest_email')->unique();
+            $table->string('guest_email');
             $table->string('guest_name');
-            $table->string('guest_password');
+            // $table->string('guest_password');
             $table->string('guest_address')->nullable();
-            $table->integer('guest_idcard');
+            $table->integer('guest_idcard')->nullable();
             $table->double('guest_phone');
             $table->timestamps();
         });

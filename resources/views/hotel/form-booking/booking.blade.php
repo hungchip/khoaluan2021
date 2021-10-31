@@ -31,7 +31,7 @@
                 <p>Phòng 1</p>
                 <div class="guest-col">
                     <label for="">Người lớn</label>
-                    <select name="room_adult_[]" id="">
+                    <select name="room_adult[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="guest-col">
                     <label for="">Trẻ em</label>
-                    <select name="room_child_[]" id="">
+                    <select name="room_child[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -54,7 +54,7 @@
                 <p>Phòng 2</p>
                 <div class="guest-col">
                     <label for="">Người lớn</label>
-                    <select name="room_adult_[]" id="">
+                    <select name="room_adult[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -64,12 +64,12 @@
                 </div>
                 <div class="guest-col">
                     <label for="">Trẻ em</label>
-                    <select name="room_child_[]" id="">
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                        <option value="">4</option>
-                        <option value="">5</option>
+                    <select name="room_child[]" id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                 <p>Phòng 3</p>
                 <div class="guest-col">
                     <label for="">Người lớn</label>
-                    <select name="room_adult_[]" id="">
+                    <select name="room_adult[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="guest-col">
                     <label for="">Trẻ em</label>
-                    <select name="room_child_[]" id="">
+                    <select name="room_child[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -100,7 +100,7 @@
                 <p>Phòng 4</p>
                 <div class="guest-col">
                     <label for="">Người lớn</label>
-                    <select name="room_adult_[]" id="">
+                    <select name="room_adult[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="guest-col">
                     <label for="">Trẻ em</label>
-                    <select name="room_child_[]" id="">
+                    <select name="room_child[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -123,7 +123,7 @@
                 <p>Phòng 5</p>
                 <div class="guest-col">
                     <label for="">Người lớn</label>
-                    <select name="room_adult_[]" id="">
+                    <select name="room_adult[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="guest-col">
                     <label for="">Trẻ em</label>
-                    <select name="room_child_[]" id="">
+                    <select name="room_child[]" id="">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>

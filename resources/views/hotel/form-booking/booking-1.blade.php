@@ -22,18 +22,21 @@
             <li><span>Check In: </span>{{date('d/m/Y', strtotime($arr['t_start']))}}</li>
             <li><span>Check Out: </span>{{date('d/m/Y', strtotime($arr['t_end']))}}</li>
         </ul>
-        {{-- <h4 class="sb-title">Room 1 of 2
-            <a href="" class="btn btn-edit">edit</a>
-        </h4> --}}
+        @for($i = 0; $i < $roomAmount; $i++)
+        <h4 class="sb-title">Room {{$i + 1}} of {{$roomAmount}}
+            {{-- <a href="" class="btn btn-edit">edit</a> --}}
+        </h4>
         <ul>
-            <li><span>Room:</span></li>
+            <li><span>Room: {{$roomType->room_type_name}}</span></li>
             <li><span>Guest: </span>
                 <span class="guest-wrapper">
-                    <span>Adult {{$arr['room_adult']}}</span>,
-                    <span> Child {{$arr['room_child']}}</span>
+                    <span>Adult {{$roomAdult[$i]}}</span>,
+                    <span> Child {{$roomChild[$i]}}</span>
                 </span>
             </li>
         </ul>
+        @endfor
+        
         {{-- <h4 class="sb-title">Room 2 of 2
             <a href="" class="btn btn-edit">edit</a>
         </h4>
@@ -44,22 +47,27 @@
                     <span>Adult 2</span>,
                     <span> Child 1</span>
                 </span>
-            </li>
+            </li>c
         </ul> --}}
-        <a href="{{route('showStepOne')}}"><button>Edit Room & Guest Quantity</button></a>
+        {{-- <a href="{{route('showStepOne')}}"><button>Edit Room & Guest Quantity</button></a> --}}
     </div>
     <div class="booking-main">
         <div class="list-booking-room">
-
+            <input type="hidden" value="{{$count++}}">
 
             @foreach($roomTypes as $roomType)
 
-            <form action="{{route('showStepThree')}}">
+            {{-- <form action="{{($count == $roomAmount) ? route('showStepThree') : route('showStepTwo')}}"> --}}
+            <form action="{{route('showStepFour')}}">
                 <input type="hidden" name="t_start" value="{{$arr['t_start']}}">
                 <input type="hidden" name="t_end" value="{{$arr['t_end']}}">
-                <input type="hidden" name="room_adult" value="{{$arr['room_adult']}}">
-                <input type="hidden" name="room_child" value="{{$arr['room_child']}}">
+                @for($i = 0; $i < $roomAmount; $i++) 
+                <input type="hidden" name="room_adult[]" value="{{$roomAdult[$i]}}">
+                <input type="hidden" name="room_child[]" value="{{$roomChild[$i]}}">
+                @endfor
                 <input type="hidden" name="room_type_id" value="{{$roomType->room_type_id}}">
+                <input type="hidden" name="room_amount" value="{{$roomAmount}}">
+                {{-- <input type="hidden" name="count" value="{{$count}}"> --}}
                 <div class="booking-room-warraper">
                     <div class="booking-room-image"><img src="{{asset('public/image')}}/{{$roomType->avatar}}" alt="">
                     </div>

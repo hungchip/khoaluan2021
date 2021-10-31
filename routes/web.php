@@ -54,4 +54,5 @@ Route::group(['prefix' => '/', 'middleware' => 'checklogin'], function () {
     Route::resource('roomType', 'RoomTypeController');
     Route::resource('room', 'RoomController');
     Route::resource('gallerys', 'GalleryController');
+    Route::resource('booking', 'BookingController');
 });
