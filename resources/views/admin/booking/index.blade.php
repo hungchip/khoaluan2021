@@ -27,7 +27,7 @@
         </div> --}}
             <div class="col-sm-1  mb-sm-0 mb-20 h-50px">
                 <a href="{{route('booking.create')}}" class="btn btn-success btn-user btn-search">
-                    <i class="fas fa-user-plus"></i></i>&nbsp; Thêm mới
+                    <i class="fas fa-user-plus"></i></i>&nbsp; Đặt phòng
                 </a>
 
             </div>
@@ -81,12 +81,12 @@
                                     <i class="fas fa-info"></i>
                                 </a>
                                 <a href="{{route('booking.edit',$booking->booking_id)}}"
-                                    class="btn btn-warning btn-circle btn-sm" title="In phiếu giao">
-                                    <i class="fas fa-user-edit"></i>
+                                    class="btn btn-warning btn-circle btn-sm" title="Tạo phiếu giao">
+                                    <i class="far fa-file-alt"></i>
                                 </a>
-                                <button class="btn btn-danger btn-circle btn-sm" title="Xóa">
+                                {{-- <button class="btn btn-danger btn-circle btn-sm" title="Xóa">
                                     <i class="fas fa-trash"></i>
-                                </button>
+                                </button> --}}
                             </td>
                         </form>
                     </tr>
@@ -134,9 +134,3 @@
 </style>
 @endsection
 
-@section('js')
-<script src="">
-
-
-</script>
-@endsection

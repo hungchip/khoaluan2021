@@ -94,12 +94,3 @@
     {{--
 </form> --}}
 @endsection
-
-@section('js')
-<script>
-    $(document).ready(function() {
-    var listBtn = document.getElementsByClassName('btn-select');
-    console.log(listBtn);
-});
-</script>
-@endsection

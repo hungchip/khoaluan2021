@@ -167,32 +167,32 @@
             // $('.booking-room-image').on('click', function(){
             //     console.log('hello');
             // });
-            $('#btn-search1').on('click', function(e){
-                e.preventDefault(); // ngăn load lại trang
-                $.ajax({
-                url: "{{route('showStepOne')}}",
-                type: 'get',
-                data: $('#form-booking').serialize(),
-                // datatype: 'html',
-                success: function(response) {
-                    // response is string -> parse to HTML
-                    // console.log(response);
-                    var parser = new DOMParser();
-                    var htmlDoc = parser.parseFromString(response, 'text/html');
-                    var bookingSideInner = htmlDoc.getElementsByClassName('booking-side-1'); 
-                    var bookingMainInner = htmlDoc.getElementsByClassName('booking-main-1'); 
-                    var test = document.getElementsByClassName('booking-side').innerHTML;
-                    // console.log(htmlDoc.body.innerHTML);
-                    // console.log(bookingSideInner);
-                    $('.booking-side').html(bookingSideInner);
-                    $('.booking-main').html(bookingMainInner);
-                },
-                error: function(response) {
-                    // console.log(response);
-                    alert('Thất bại!!!');
-                }
-                });
-            });
+            // $('#btn-search1').on('click', function(e){
+            //     e.preventDefault(); // ngăn load lại trang
+            //     $.ajax({
+            //     url: "{{route('showStepOne')}}",
+            //     type: 'get',
+            //     data: $('#form-booking').serialize(),
+            //     // datatype: 'html',
+            //     success: function(response) {
+            //         // response is string -> parse to HTML
+            //         // console.log(response);
+            //         var parser = new DOMParser();
+            //         var htmlDoc = parser.parseFromString(response, 'text/html');
+            //         var bookingSideInner = htmlDoc.getElementsByClassName('booking-side-1'); 
+            //         var bookingMainInner = htmlDoc.getElementsByClassName('booking-main-1'); 
+            //         var test = document.getElementsByClassName('booking-side').innerHTML;
+            //         // console.log(htmlDoc.body.innerHTML);
+            //         // console.log(bookingSideInner);
+            //         $('.booking-side').html(bookingSideInner);
+            //         $('.booking-main').html(bookingMainInner);
+            //     },
+            //     error: function(response) {
+            //         // console.log(response);
+            //         alert('Thất bại!!!');
+            //     }
+            //     });
+            // });
 
             // $('#btn-select').on('click', function(e){
             //     e.preventDefault(); // ngăn load lại trang

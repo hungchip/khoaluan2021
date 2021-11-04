@@ -27,12 +27,10 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($guest_id, $checkin, $checkout)
+    public function create()
     {
-        $this->guest_id = $guest_id;
-        $this->checkin = $checkin;
-        $this->checkout = $checkout;
-        $this->save();
+        $roomTypes = RoomType::all();
+        return view('admin.booking.create', compact('roomTypes'));
     }
 
     /**

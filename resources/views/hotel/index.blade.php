@@ -68,7 +68,7 @@
             </div>
 
             <div class="submit-button">
-                <button>Đặt phòng</button>
+                <a href="{{route('showStepOne')}}"><button type="button" class="">Đặt phòng</button></a>
             </div>
         </form>
     </div>
@@ -280,7 +280,7 @@
             <div class="
                                     col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="col-inner">
-                    <span class="count">300</span>
+                    <span class="count">30</span>
                     <p class="">Giải thưởng đã nhận</p>
                 </div>
             </div>
@@ -323,7 +323,8 @@
             <div class="hotel-text">
                 <div class="hotel-text-tittle">Bể bơi vô cực</div>
                 <p>
-                    Đem lại một trải nghiệm tuyệt vời. Quý khách sẽ được thư giãn với bể bơi có view nhìn ra thiên nhiên.
+                    Đem lại một trải nghiệm tuyệt vời. Quý khách sẽ được thư giãn với bể bơi có view nhìn ra thiên
+                    nhiên.
                 </p>
             </div>
         </div>
@@ -426,21 +427,21 @@
 @section('js')
 
 <script>
-    $(document).ready(function() {
-    function increment(elem, finalVal) {
-    var currVal = parseInt(document.getElementById(elem).innerHTML, 10);
-    if (currVal < finalVal) {
-        currVal++;
-        document.getElementById(elem).innerHTML = currVal + "%";
-        setTimeout(function() {
-            increment(elem, finalVal);
-        }, 40)
-    }
-};
+//     $(document).ready(function() {
+//     function increment(elem, finalVal) {
+//     var currVal = parseInt(document.getElementById(elem).innerHTML, 10);
+//     if (currVal < finalVal) {
+//         currVal++;
+//         document.getElementById(elem).innerHTML = currVal + "%";
+//         setTimeout(function() {
+//             increment(elem, finalVal);
+//         }, 40)
+//     }
+//     };
 
-$('#count-room').waypoint(function() {
-        increment('#count-room', 87);
-    }, {offset: '75%'});
-});
+// $('#count-room').waypoint(function() {
+//         increment('#count-room', 87);
+//     }, {offset: '75%'});
+// });
 </script>
 @endsection

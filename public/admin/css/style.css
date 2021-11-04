@@ -1,0 +1,5 @@
+.room-wrap:not(:first-child) {
+    border: solid 1px;
+    margin: 20px 0;
+    display: none;
+}
