@@ -25,12 +25,14 @@
                 <i class="fas fa-search"></i>&nbsp; Tìm Kiếm
             </button>
         </div> --}}
+        @if (Auth::guard('admin')->user()->hasRole('admin'))
             <div class="col-sm-1  mb-sm-0 mb-20 h-50px">
                 <a href="{{route('service.create')}}" class="btn btn-success btn-user btn-search">
                     <i class="fas fa-user-plus"></i></i>&nbsp; Thêm mới
                 </a>
 
             </div>
+        @endif
         </div>
     </div>
 
@@ -77,6 +79,7 @@
                                     class="btn btn-primary btn-circle btn-sm" title="Chi tiết">
                                     <i class="fas fa-info"></i>
                                 </a> --}}
+                                @if (Auth::guard('admin')->user()->hasRole('admin'))
                                 <a href="{{route('service.edit',$service->service_id)}}"
                                     class="btn btn-warning btn-circle btn-sm" title="Chỉnh sửa">
                                     <i class="fas fa-user-edit"></i>
@@ -84,6 +87,7 @@
                                 <button class="btn btn-danger btn-circle btn-sm" title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                @endif 
                             </td>
                         </form>
                     </tr>

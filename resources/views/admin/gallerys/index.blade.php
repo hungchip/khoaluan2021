@@ -25,12 +25,14 @@
                 <i class="fas fa-search"></i>&nbsp; Tìm Kiếm
             </button>
         </div> --}}
+        @if (Auth::guard('admin')->user()->hasRole('admin'))
             <div class="col-sm-1  mb-sm-0 mb-20 h-50px">
                 <a href="{{route('gallerys.create')}}" class="btn btn-success btn-user btn-search">
                     <i class="fas fa-user-plus"></i></i>&nbsp; Thêm mới
                 </a>
 
             </div>
+            @endif 
         </div>
     </div>
 
@@ -67,9 +69,11 @@
                             @csrf
                             @method('delete')
                             <td>
+                                @if (Auth::guard('admin')->user()->hasRole('admin'))
                                 <button class="btn btn-danger btn-circle btn-sm" title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </button>
+                                @endif
                             </td>
                         </form>
                     </tr>

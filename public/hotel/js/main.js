@@ -128,7 +128,13 @@ $(document).ready(function() {
             }
         ]
     });
-
+    $('.list-image-carousel').slick({
+        infinite: true,
+        prevArrow: false,
+        nextArrow: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+    });
     // date picker
 
 
@@ -205,5 +211,6 @@ $(document).ready(function() {
             }
         }
     });
+
 
 });

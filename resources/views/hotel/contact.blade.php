@@ -7,7 +7,11 @@
         <p class="intro-top">Liên hệ với chúng tôi</p>
     </div>
 </section>
-
+@if(Session::has('flash_message'))
+<script>
+    alert("{{Session::get('flash_message')}}");
+</script>
+@endif;
 <!-- end banner  -->
 
 <!-- content -->
@@ -24,23 +28,32 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="confirm-form">
-                        <form action="" method="post">
+                        <form action="{{route('postContact')}}" method="post">
+                            @csrf
                             <div class="confirm-list">
                                 <label for="name">Tên <span>*</span></label>
-                                <input type="text" id="name" placeholder="Tên của bạn">
+                                <input type="text" id="name" placeholder="Tên của bạn" name="name">
+
                             </div>
+                            <span class="error-message text-danger">{{$errors->first('name')}}</span></p>
                             <div class="confirm-list">
                                 <label for="email">Email <span>*</span></label>
-                                <input type="email" id="email" placeholder="Email của bạn">
+                                <input type="email" id="email" placeholder="Email của bạn" name="email">
                             </div>
+                            <span class="error-message text-danger">{{$errors->first('email')}}</span></p>
+
                             <div class="confirm-list">
                                 <label for="phone">Điện thoại <span>*</span></label>
-                                <input type="number" id="phone" placeholder="Số điện thoại của bạn">
+                                <input type="number" id="phone" placeholder="Số điện thoại của bạn" name="phone">
                             </div>
+                            <span class="error-message text-danger">{{$errors->first('phone')}}</span></p>
+
                             <div class="confirm-list">
                                 <label for="message">Lời nhắn</label>
-                                <textarea name="" id="message" rows="3"></textarea>
+                                <textarea name="message" id="message" rows="3"></textarea>
                             </div>
+                            <span class="error-message text-danger">{{$errors->first('message')}}</span></p>
+
                             <div class="confirm-list">
                                 <label for="submit"></label>
                                 <button type="submit">Gửi</button>
@@ -79,6 +92,10 @@
     .banner {
         background-image: url('{{asset('public/hotel/images/room-08.jpeg')}}');
         height: 400px;
+    }
+
+    .confirm-form form {
+        text-align: center;
     }
 </style>
 @endsection

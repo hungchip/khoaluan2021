@@ -32,8 +32,6 @@ class RoomTypeSeeder extends Seeder
                                         <li>Free Internet access</li>
                                     </ul>',
                 'quote' => 'Deluxe rooms offer comfortable space in the heart hello',
-                'room_type_adult' => 4,
-                'room_type_child' => 2,
                 'room_type_amount' => 2,
                 'avatar' => 'room-07.jpeg',
                 'created_at' => new DateTime(),
@@ -55,8 +53,6 @@ class RoomTypeSeeder extends Seeder
                                         <li>Free Internet access</li>
                                     </ul>',
                 'quote' => 'Deluxe rooms offer comfortable space in the heart',
-                'room_type_adult' => 4,
-                'room_type_child' => 4,
                 'room_type_amount' => 3,
                 'avatar' => 'room-08.jpeg',
                 'created_at' => new DateTime(),
@@ -78,8 +74,6 @@ class RoomTypeSeeder extends Seeder
                                         <li>Free Internet access</li>
                                     </ul>',
                 'quote' => 'Deluxe rooms offer comfortable space in the heart',
-                'room_type_adult' => 2,
-                'room_type_child' => 2,
                 'room_type_amount' => 4,
                 'avatar' => 'room-02.jpeg',
                 'created_at' => new DateTime(),
@@ -101,8 +95,6 @@ class RoomTypeSeeder extends Seeder
                                         <li>Free Internet access</li>
                                     </ul>',
                 'quote' => 'Deluxe rooms offer comfortable space in the heart...',
-                'room_type_adult' => 4,
-                'room_type_child' => 2,
                 'room_type_amount' => 4,
                 'avatar' => 'room-04.jpeg',
                 'created_at' => new DateTime(),
@@ -124,8 +116,6 @@ class RoomTypeSeeder extends Seeder
                                         <li>Free Internet access</li>
                                     </ul>',
                 'quote' => 'Deluxe rooms offer comfortable space in the heart...',
-                'room_type_adult' => 2,
-                'room_type_child' => 2,
                 'room_type_amount' => 5,
                 'avatar' => 'room-03.jpeg',
                 'created_at' => new DateTime(),
@@ -147,8 +137,6 @@ class RoomTypeSeeder extends Seeder
                                         <li>Free Internet access</li>
                                     </ul>',
                 'quote' => 'Deluxe rooms offer comfortable space in the heart...',
-                'room_type_adult' => 6,
-                'room_type_child' => 6,
                 'room_type_amount' => 4,
                 'avatar' => 'room-05.jpeg',
                 'created_at' => new DateTime(),
@@ -170,8 +158,6 @@ class RoomTypeSeeder extends Seeder
                                         <li>Free Internet access</li>
                                     </ul>',
                 'quote' => 'Deluxe rooms offer comfortable space in the heart...',
-                'room_type_adult' => 2,
-                'room_type_child' => 2,
                 'room_type_amount' => 3,
                 'avatar' => 'room-06.jpeg',
                 'created_at' => new DateTime(),
@@ -193,8 +179,6 @@ class RoomTypeSeeder extends Seeder
                                         <li>Free Internet access</li>
                                     </ul>',
                 'quote' => 'Deluxe rooms offer comfortable space in the heart...',
-                'room_type_adult' => 2,
-                'room_type_child' => 2,
                 'room_type_amount' => 6,
                 'avatar' => 'room-07.jpeg',
                 'created_at' => new DateTime(),

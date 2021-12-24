@@ -19,8 +19,8 @@ class CreateGuestsTable extends Migration
             $table->string('guest_name');
             // $table->string('guest_password');
             $table->string('guest_address')->nullable();
-            $table->integer('guest_idcard')->nullable();
-            $table->double('guest_phone');
+            $table->string('guest_idcard')->nullable();
+            $table->string('guest_phone');
             $table->timestamps();
         });
     }

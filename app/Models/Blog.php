@@ -8,9 +8,16 @@ class Blog extends Model
 {
     protected $table = 'hc_blogs';
     protected $primaryKey = 'blog_id';
-
-    protected $fields = [
-        'image',
+    
+    protected $filable = [
+        'title', 'admin_id', 'content', 'quote',
     ];
 
+    protected $hidden = [
+        '_token',
+    ];
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin', 'admin_id');
+    }
 }

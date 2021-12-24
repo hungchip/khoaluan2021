@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Models\Admin;
+use App\Models\Booking;
+use App\Models\Role;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-
-    }
 
     public function showListAdmin(Request $request)
     {
@@ -37,41 +36,16 @@ class AdminController extends Controller
                 $query->where('admin_email', 'LIKE', '%' . $request->adminEmail . '%');
             }
 
-            $admins = $query->paginate(8);
+            $admins = $query->orderBy('admin_name')->paginate(8);
 
             return view('admin.administrator.list-admin', compact('admins'));
         } else {
-            $admins = Admin::paginate(8);
+            $admins = Admin::orderBy('admin_name')->paginate(8);
             return view('admin.administrator.list-admin')->with(['admins' => $admins]);
         }
-        
+
     }
 
-    public function findAdmin1(Request $request)
-    {
-        $conditions = [];
-        $adminName = $request->adminName;
-        $adminID = $request->admin_id;
-        $adminEmail = $request->adminEmail;
-
-        $query = Admin::query();
-
-        if ($request->adminID) {
-            $query->where('admin_id', 'LIKE', '%' . $request->adminID . '%');
-        }
-
-        if ($request->adminName) {
-            $query->where('admin_name', 'LIKE', '%' . $request->adminName . '%');
-        }
-
-        if ($request->adminEmail) {
-            $query->where('admin_email', 'LIKE', '%' . $request->adminEmail . '%');
-        }
-
-        $admins = $query->get();
-
-        return view('admin.administrator.list-admin', compact('admins'));
-    }
     /**
      * Display a listing of the resource.
      *
@@ -80,9 +54,50 @@ class AdminController extends Controller
     // return view dashboard
     public function index()
     {
-        // $adminName = Auth::guard('admin')->user()->admin_name;
-        // dd($adminName);
-        return view('admin.index');
+        $bookings = Booking::all();
+        // date_format($bookings[1]->created_at,"m") lấy tháng;
+        $count = 0;
+        // $start = strtotime(date("1-m-Y"));
+        // $end = strtotime(date("t-m-Y"));
+        $thisMoth = date("m");
+        $bookingThisMonths = [];
+        foreach ($bookings as $booking) {
+            if (date_format($booking->created_at, "m") == $thisMoth) {
+                $bookingThisMonths[] = $booking;
+                $count++;
+            }
+        }
+        $admins = Admin::all();
+        $roomTypes = RoomType::all();
+        $pendingRequests = Booking::where('status', 0)->get();
+        $monthData = [];
+        for ($i = 0; $i < 12; $i++) {
+            $monthData[] = $i;
+            $monthData[$i] = 0;
+            foreach ($bookings as $booking) {
+                if (date_format($booking->created_at, "m") == $i + 1) {
+                    $monthData[$i]++;
+                }
+            }
+        }
+
+        $status = [];
+        for ($i = 0; $i < 4; $i++) {
+            $status[] = $i;
+            $status[$i] = 0;
+        }
+        // $bookingThisMonths = Booking::where(date_format($booking->created_at,"m"),'=', $thisMoth)->get();
+        foreach ($bookingThisMonths as $booking) {
+            if ($booking->status == 0) {
+                $status[0]++;
+            } elseif ($booking->status == 1) {
+                $status[1]++;
+            } else {
+                $status[2]++;
+            }
+        }
+
+        return view('admin.index', compact('count', 'admins', 'roomTypes', 'pendingRequests', 'monthData', 'status'));
     }
 
     /**
@@ -124,7 +139,7 @@ class AdminController extends Controller
         $admin->admin_email = $request->adminEmail;
         $admin->password = bcrypt($request->password);
         $admin->admin_name = $request->adminName;
-
+        $admin->roles()->attach(Role::where('role_name', 'basic')->first());
         // save and return with message
         $admin->save();
         return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Thêm mới thành công!!!']);
@@ -173,7 +188,9 @@ class AdminController extends Controller
 
         $admin = Admin::find($id);
         $admin->admin_name = $request->adminName;
-        $admin->password = bcrypt($request->password);
+        if ($request->password) {
+            $admin->password = bcrypt($request->password);
+        }
         $admin->save();
 
         return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Chỉnh sửa thành công !!!']);
@@ -254,5 +271,34 @@ class AdminController extends Controller
         } else {
             return redirect()->back()->with(['flash_level' => 'danger', 'flash_message' => 'Mật khẩu cũ không đúng !!!']);
         }
+    }
+//gán Quyền
+    public function assignRole(Request $request)
+    {
+        $admin = Admin::where('admin_id', $request->admin_id)->first();
+        if (Auth::guard('admin')->user()->admin_id == $admin->admin_id) {
+            return redirect()->back()->with(['flash_level' => 'danger', 'flash_message' => 'Không thể cấp quyền chính mình']);
+        } else {
+            $admin->roles()->detach();
+            if ($request->adminRole) {
+                $admin->roles()->attach(Role::where('role_name', 'admin')->first());
+            }
+            if ($request->authorRole) {
+                $admin->roles()->attach(Role::where('role_name', 'author')->first());
+            }
+            if ($request->receptionistRole) {
+                $admin->roles()->attach(Role::where('role_name', 'receptionist')->first());
+            }
+            if ($request->basicRole) {
+                $admin->roles()->attach(Role::where('role_name', 'basic')->first());
+            }
+
+            return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Cấp quyền thành công !!!']);
+        }
+    }
+
+    public function showChart()
+    {
+        return view('admin.charts');
     }
 }

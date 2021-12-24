@@ -32,7 +32,7 @@
                     <div class="content-image-list">
                         <div class="list-image-carousel">
                             @foreach($listImages as $image)
-                            <img src="{{ asset('public/image/')}}/{{$image->link}}" alt="">
+                            <img src="{{ asset('public/image/')}}/{{$image->link}}" alt="image-carousel-item" class="image-carousel-item">
                             @endforeach
                         </div>
                     </div>
@@ -81,5 +81,9 @@
         background-image: url('{{asset('public/hotel/images/room-05.jpeg')}}');
         height: 400px;
     }
+    .image-carousel-item{
+        width: 30%;
+    }
 </style>
 @endsection
+

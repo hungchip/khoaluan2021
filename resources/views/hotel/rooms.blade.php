@@ -42,7 +42,7 @@
                     </div>
                     <div class="room-price">
                         <p>Giá: <span>{{number_format($roomType->room_type_price)}}</span> VND/Ngày</p>
-                        <a href="">
+                        <a href="{{route('showStepOne')}}">
                             <button>Đặt phòng ngay</button>
                         </a>
                     </div>

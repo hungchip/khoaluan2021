@@ -1,72 +1,26 @@
 @extends('admin.default.master')
 @section('content')
-<!-- Page Heading -->
-{{-- <h1 class="h3 mb-2 text-dark">Tables</h1> --}}
-{{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. --}}
-{{-- For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> --}}
-
-<!-- DataTales Example -->
 <div class="row justify-content-center">
-    <div class="col-lg-7">
+    <div class="col-lg-12">
         <div class="p-3">
             <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Chi tiết loại phòng </h1>
+                <h1 class="h4 text-gray-900 mb-4">Chi tiết phòng </h1>
             </div>
-            <form action="" class="user" method="post" enctype="multipart/form-data">
 
-                @csrf
-                <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <h4 class=" mb-2 text-dark">Tên loại phòng</h4>
-                        <p> {{$roomType->room_type_name}}</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4 class=" mb-2 text-dark">Giá</h4>
-                        <p> {{$roomType->room_type_price}}</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4 class=" mb-2 text-dark">Số lượng
-                        </h4>
-                        <p> {{$roomType->room_type_amount}}</p>
-                    </div>
-                    <div class="col-sm-12">
-                        <h4 class=" mb-2 text-dark">Mô tả ngắn</h4>
-                        <p> {{$roomType->quote}}</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4 class=" mb-2  text-dark">Người lớn</h4>
-                        <p> {{$roomType->room_type_adult}}</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4 class=" mb-2 text-dark">Trẻ em</h4>
-                        <p> {{$roomType->room_type_child}}</p>
-                    </div>
-                    <div class="col-sm-12">
-                        <h4 class=" mb-2 text-dark">Mô tả
-                        </h4>
-                        <p> {{$roomType->room_type_desc}}</p>
-                    </div>
-                    <div class="col-sm-12 ">
-                        <h4 class=" mb-2 text-dark">Ảnh đại diện</h4>
-                        <img src="{{asset('public/image/')}}/{{$roomType->avatar}}" alt="" width="300">
-                        
-                    </div>
-                    <div class="col-sm-12  ">
-                        <h4 class=" mb-2 text-dark">Danh sách ảnh</h4>
-                        @foreach ($listImages as $image)
-                        <img src="{{asset('public/image/')}}/{{$image->link}}" alt="" width="200">
-                        @endforeach
-                    </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <h4 class=" mb-2 text-dark">Tên loại phòng</h4>
+                    <p> {{$roomType->room_type_name}}</p>
                 </div>
-                <div class="form-group">
-                    <h4 class=" mb-2 text-dark">Thông tin</h4>
-                    <p name="info" id="" rows="5">{!!$roomType->room_type_info!!}</p>
-                    <span class="error-message text-danger">{{$errors->first('info')}}</span></p>
+                <div class="col-md-6">
+                    <h4 class=" mb-2 text-dark">Số phòng</h4>
+                    <p> {{$room->room_number}}</p>
                 </div>
-                <a href="{{route('roomType.index')}}" class="btn btn-primary btn-user btn-block col-sm-3 mg-0-auto">
-                    Quay lại
-                </a>
-            </form>
+            </div>
+
+            <a href="{{route('room.index')}}" class="btn btn-primary btn-user btn-block col-sm-3 mg-0-auto">
+                Quay lại
+            </a>
         </div>
     </div>
 </div>

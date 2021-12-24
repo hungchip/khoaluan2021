@@ -19,6 +19,7 @@ class CreateAdminsRolesTable extends Migration
             $table->foreign('admin_id')->references('admin_id')->on('hc_admins')->onDelete('cascade');
             $table->integer('role_id')->unsigned();
             $table->foreign('role_id')->references('role_id')->on('hc_roles')->onDelete('cascade');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

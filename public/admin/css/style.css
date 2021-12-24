@@ -1,5 +1,34 @@
-.room-wrap:not(:first-child) {
+.room-item {
     border: solid 1px;
     margin: 20px 0;
+}
+
+.room-item:not(:first-child) {
     display: none;
+}
+
+.t-check-in,
+.t-check-out {
+    padding: 0;
+    height: 50px;
+    font-size: .8rem;
+    border-radius: 10rem;
+}
+
+.t-dates {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.t-datepicker {
+    display: flex;
+}
+
+.btn-circle {
+    margin-right: 15px;
+}
+
+.btn-circle:hover {
+    transform: scale(1.3);
 }

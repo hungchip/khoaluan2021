@@ -48,6 +48,9 @@
                 <button type="submit" class="btn btn-success btn-user btn-block col-sm-3 mg-0-auto">
                     Xác nhận
                 </button>
+                <a href="{{route('showListAdmin')}}" class="btn btn-primary btn-user btn-block col-sm-3 mg-0-auto">
+                    Quay lại
+                </a>
             </form>
         </div>
     </div>

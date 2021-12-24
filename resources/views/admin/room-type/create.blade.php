@@ -17,34 +17,25 @@
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" id="" placeholder="Tên loại phòng"
-                            name="name">
+                            name="name" value="{{old('name')}}">
                         <span class="error-message text-danger">{{$errors->first('name')}}</span></p>
                     </div>
                     <div class="col-sm-6">
                         <input type="number" class="form-control form-control-user" id="" placeholder="Giá"
-                            name="price">
+                            name="price" value="{{old('price')}}">
                         <span class="error-message text-danger">{{$errors->first('price')}}</span></p>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <input type="text" class="form-control form-control-user" id="" placeholder="Mô tả ngắn"
-                            name="quote">
+                            name="quote" value="{{old('quote')}}">
                         <span class="error-message text-danger">{{$errors->first('quote')}}</span></p>
                     </div>
                     <div class="col-sm-6">
                         <input type="text" class="form-control form-control-user" id="" placeholder="Mô tả"
-                            name="description">
+                            name="description" value="{{old('description')}}">
                         <span class="error-message text-danger">{{$errors->first('description')}}</span></p>
                     </div>
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control form-control-user" id="" placeholder="Số người lớn"
-                            name="adult">
-                        <span class="error-message text-danger">{{$errors->first('adult')}}</span></p>
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="number" class="form-control form-control-user" id="" placeholder="Số trẻ em"
-                            name="child" value="0">
-                        <span class="error-message text-danger">{{$errors->first('child')}}</span></p>
-                    </div>
+                    
                     <div class="col-sm-6 mb-3 mb-sm-0  ">
                         <label for="avatar"> Ảnh đại diện</label>
                         <input type="file" accept="image/*" class="form-control form-control-user" id="avatar" name="avatar">
@@ -58,7 +49,7 @@
                 </div>
                 <div class="form-group">
                     <label for="info"> Thông tin</label>
-                    <textarea name="info" id="test" rows="5"></textarea>
+                    <textarea name="info" id="test" rows="5">{{old('info')}}</textarea>
                     <span class="error-message text-danger">{{$errors->first('info')}}</span></p>
                 </div>
                 <button type="submit" class="btn btn-success btn-user btn-block col-sm-3 mg-0-auto">

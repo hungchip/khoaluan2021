@@ -20,6 +20,7 @@ class BookingDetail extends Model
 
     public function roomTypes()
     {
-        return $this->hasOne('App\Models\RoomType', 'room_type_id');
+        return $this->belongsTo('App\Models\RoomType', 'room_type_id');
     }
+
 }

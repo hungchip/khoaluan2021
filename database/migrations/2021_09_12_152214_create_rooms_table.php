@@ -17,8 +17,7 @@ class CreateRoomsTable extends Migration
             $table->increments('room_id');
             $table->integer('room_type_id')->unsigned();
             $table->foreign('room_type_id')->references('room_type_id')->on('hc_room_types')->onDelete('cascade');
-            // $table->integer('room_adult')->default(0);
-            // $table->integer('room_child')->default(0);
+            $table->string('room_number')->nullable();
             $table->integer('room_status')->default(0);
             $table->timestamps();
         });

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Blog;
 use App\Models\Gallery;
 use App\Models\ListImage;
+use App\Models\Room;
 use App\Models\RoomType;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -25,9 +30,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $roomTypes = RoomType::all();
-        $specialRooms = RoomType::take(4)->orderBy('room_type_price','desc')->get();
-        return view('hotel.index', compact('roomTypes','specialRooms'));
+        $roomTypes = RoomType::where('room_type_amount', '>', 0)->get();
+        $specialRooms = RoomType::take(4)->orderBy('room_type_price', 'desc')->get();
+        $rooms = Room::all();
+        $admins = Admin::all();
+        return view('hotel.index', compact('roomTypes', 'specialRooms', 'rooms', 'admins'));
     }
 
     public function showPageAbout()
@@ -37,7 +44,7 @@ class HomeController extends Controller
 
     public function showPageRoom()
     {
-        $roomTypes = RoomType::all();
+        $roomTypes = RoomType::where('room_type_amount', '>', 0)->get();
 
         return view('hotel.rooms', compact('roomTypes'));
     }
@@ -50,13 +57,15 @@ class HomeController extends Controller
     public function showPageGallery()
     {
         $gallerys = Gallery::all();
-        
+
         return view('hotel.gallery', compact('gallerys'));
     }
 
     public function showPageBlog()
     {
-        return view('hotel.blog');
+        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        $recentBlogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
+        return view('hotel.blog', compact('blogs', 'recentBlogs'));
     }
 
     public function showPageContact()
@@ -64,11 +73,39 @@ class HomeController extends Controller
         return view('hotel.contact');
     }
 
+    public function postContact(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'message' => 'required',
+        ], []);
+
+        Mail::send('email.contact-email', [
+            'request' => $request,
+        ], function ($email) use ($request) {
+            $email->to($request->email);
+            $email->from($request->email);
+            $email->subject('Anh Em Hotel');
+        });
+
+        return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Gửi Liên hệ thành công!!!']);
+    }
+
     public function showDetailRoom($id)
     {
         $roomType = RoomType::find($id);
-        $roomTypes = RoomType::all();
-        $listImages = ListImage::where('room_type_id',$id)->get();
-        return view('hotel.detail-rooms',compact('roomType', 'roomTypes', 'listImages'));
+        $roomTypes = RoomType::where('room_type_amount', '>', 0)->get();
+        $listImages = ListImage::where('room_type_id', $id)->get();
+        return view('hotel.detail-rooms', compact('roomType', 'roomTypes', 'listImages'));
     }
+
+    public function showBlogDetail($id)
+    {
+        $blog = Blog::find($id);
+        $recentBlogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
+        return view('hotel.blog-detail', compact('blog', 'recentBlogs'));
+    }
+
 }

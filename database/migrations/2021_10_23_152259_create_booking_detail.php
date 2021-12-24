@@ -19,9 +19,10 @@ class CreateBookingDetail extends Migration
             $table->foreign('booking_id')->references('booking_id')->on('hc_bookings')->onDelete('cascade');
             $table->integer('room_type_id')->unsigned();
             $table->foreign('room_type_id')->references('room_type_id')->on('hc_room_types')->onDelete('cascade');
-            $table->integer('amount')->default(0);
+            $table->integer('no')->default(0);
             $table->integer('roomAdult')->default(0);
             $table->integer('roomChild')->default(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

@@ -232,8 +232,8 @@
             <div class="row">
                 @foreach($roomTypes as $room)
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 room-img">
-                    <a href=""><img src="{{ asset('public/image/') }}/{{$room->avatar}}" alt=""></a>
-                    <a href="">
+                    <a href="{{route('showDetailRoom',$room->room_type_id)}}"><img src="{{ asset('public/image/') }}/{{$room->avatar}}" alt=""></a>
+                    <a href="{{route('showDetailRoom',$room->room_type_id)}}">
                         <div class="room-img-text">
                             <p>{{$room->room_type_name}}</p>
                             {{-- <p>Moun view</p> --}}
@@ -259,14 +259,14 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="col-inner">
-                    <span id="count-room" class="count">50</span>
+                    <span id="count-room" class="count">{{count($rooms)}}</span>
                     <p class="">Phòng</p>
                 </div>
             </div>
             <div class="
                             col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="col-inner">
-                    <span class="count">100</span>
+                    <span class="count">{{count($admins)}}</span>
                     <p class="">Nhân sự</p>
                 </div>
             </div>

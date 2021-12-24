@@ -18,7 +18,12 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    {{-- t date picker --}}
+    <link rel="stylesheet" href="{{asset('public/hotel/plugin/datepicker/t-datepicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/hotel/plugin/datepicker/t-datepicker-main.css')}}">
+    {{-- style default --}}
     <link href="{{ asset('public/admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    {{-- main style --}}
     <link href="{{ asset('public/admin/css/style.css') }}" rel="stylesheet">
     @yield('css')
 </head>
@@ -32,7 +37,8 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('home')}}" target="blank">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('home')}}"
+                target="blank">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -52,7 +58,7 @@
                 </a>
             </li>
             <hr class="sidebar-divider">
-            
+
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('admin.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -76,12 +82,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         {{-- <h6 class="collapse-header">Custom Utilities:</h6> --}}
-                        <a class="collapse-item" href="{{route('showListAdmin')}}">Quản trị viên</a>
-                        <a class="collapse-item" href="">Phân quyền</a>
-                        <a class="collapse-item" href="{{route('booking.index')}}">Đặt phòng</a>
-                        {{-- <a class="collapse-item" href="utilities-border.html">Borders</a> --}}
-                        {{-- <a class="collapse-item" href="utilities-animation.html">Animations</a> --}}
-                        {{-- <a class="collapse-item" href="utilities-other.html">Other</a> --}}
+                        <a class="collapse-item" href="{{route('showListAdmin')}}">Quản Trị Viên</a>
+                        <a class="collapse-item" href="{{route('booking.index')}}">Đặt Phòng</a>
+                        <a class="collapse-item" href="{{route('showMapRoom')}}">Sơ Đồ Phòng</a>
+                        <a class="collapse-item" href="{{route('room.index')}}">Phòng</a>
+                        <a class="collapse-item" href="{{route('service.index')}}">Dịch Vụ</a>
                     </div>
                 </div>
             </li>
@@ -113,33 +118,18 @@
                     <span>Loại phòng</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('room.index')}}">
-                    <i class="far fa-newspaper"></i>
-                    <span>Phòng</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('service.index')}}">
-                    <i class="far fa-newspaper"></i>
-                    <span>Dịch vụ</span></a>
-            </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{route('blog.index')}}">
                     <i class="far fa-newspaper"></i>
                     <span>Bài viết</span></a>
-            </li> --}}
-            {{-- media  --}}
+            </li>
+
+            {{-- media --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{route('gallerys.index')}}">
                     <i class="fas fa-photo-video"></i>
-                    <span>Media</span></a>
+                    <span>Bộ sưu tập</span></a>
             </li>
-            <!-- phòng -->
-            <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-bed"></i>
-                    <span>Quản Lý Phòng</span></a>
-            </li>
-            
+
 
             {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -160,7 +150,8 @@
             </li> --}}
 
             <!-- Divider -->
-            {{-- <hr class="sidebar-divider">
+            {{--
+            <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
@@ -209,7 +200,7 @@
 
             <!-- Nav Item - Charts -->
             {{-- <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{route('showChart')}}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
             </li>
@@ -219,7 +210,7 @@
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
-            </li>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -227,7 +218,7 @@
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div> --}}
+            </div>
 
             <!-- Sidebar Message -->
             {{-- <div class="sidebar-card">
@@ -473,7 +464,8 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Bản quyền bởi &copy; <a href="https://www.facebook.com/hung.chip.1069/" target="_blank">Vũ
+                                Việt Hưng</a> - K61THA - Học viện Nông Nghiệp Việt Nam</span>
                     </div>
                 </div>
             </footer>
@@ -519,15 +511,20 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('public/admin/js/sb-admin-2.min.js') }}"></script>
-
+    <!-- datepicker  -->
+    <script src="{{ asset('public/hotel/plugin/datepicker/t-datepicker.min.js')}}"></script>
     <!-- Page level plugins -->
-    <script src="{{ asset('public/admin/vendor/chart.js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('public/admin/vendor/chart.js/Chart.min.js') }}"></script> --}}
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('public/admin/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('public/admin/js/demo/chart-pie-demo.js') }}"></script>
+    {{-- <script src="{{ asset('public/admin/js/demo/chart-area-demo.js') }}"></script> --}}
+    {{-- <script src="{{ asset('public/admin/js/demo/chart-pie-demo.js') }}"></script> --}}
     {{-- <script src="{{ asset('public/admin/js/ckeditor.js') }}"></script> --}}
-    <script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    {{--Chart.js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"></script>
+    {{-- ckeditor --}}
+    <script src="http://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
     <script src="{{ asset('public/admin/js/main.js')}}"></script>
     <script>
         CKEDITOR.replace('ckeditor');

@@ -43,18 +43,7 @@
                             name="quote">
                         <span class="error-message text-danger">{{$errors->first('quote')}}</span></p>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="">Người lớn</label>
-                        <input type="number" class="form-control form-control-user" id=""
-                            value="{{$roomType->room_type_adult}}" name="adult">
-                        <span class="error-message text-danger">{{$errors->first('adult')}}</span></p>
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Trẻ em</label>
-                        <input type="number" class="form-control form-control-user" id=""
-                            value="{{$roomType->room_type_child}}" name="child">
-                        <span class="error-message text-danger">{{$errors->first('child')}}</span></p>
-                    </div>
+                   
                     <div class="col-sm-12  ">
                         <label for="avatar"> Ảnh đại diện</label>
                         <img src="{{asset('public/image/')}}/{{$roomType->avatar}}" alt="" width="300">

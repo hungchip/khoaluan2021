@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ListImage;
+use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -46,9 +47,7 @@ class RoomTypeController extends Controller
             'price' => 'required|numeric',
             'info' => 'required',
             'quote' => 'required',
-            'adult' => 'required|numeric|max:4|min:1',
-            'child' => 'nullable|numeric|max:5|min:0',
-            'avatar' => 'required|file|image|size:2000',
+            'avatar' => 'required|file|image|max:2000',
             'listImage' => 'required',
             'listImage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'description' => 'required',
@@ -59,16 +58,9 @@ class RoomTypeController extends Controller
             'price.numeric' => 'Giá không đúng định dạng',
             'info.required' => 'Thông tin không được để trống',
             'quote.required' => 'Mô tả ngắn không được để trống',
-            'adult.required' => 'Số người lớn không được để trống',
-            'adult.numeric' => 'Dữ liệu không đúng định dạng',
-            'adult.max' => 'Số người lớn tối đa là 4',
-            'adult.min' => 'Số người lớn tối thiểu là 1',
-            'child.numeric' => 'Dữ liệu không đúng định dạng',
-            'child.max' => 'Số trẻ em tối đa là 5',
-            'child.min' => 'Số trẻ em tối thiểu là 0',
             'avatar.required' => 'Ảnh đại diện không được để trống',
             'avatar.image' => 'Dữ liệu không đúng định dạng',
-            'avatar.size' => 'Dung lượng ảnh tối đa là 2MB',
+            'avatar.max' => 'Dung lượng ảnh tối đa là 2MB',
             'listImage.required' => 'Ảnh đại diện không được để trống',
             'listImage.image' => 'Dữ liệu không đúng định dạng',
             'description.required' => 'Mô tả không được để trống',
@@ -82,8 +74,6 @@ class RoomTypeController extends Controller
         $roomType->room_type_desc = $request->description;
         $roomType->room_type_info = $request->info;
         $roomType->quote = $request->quote;
-        $roomType->room_type_adult = $request->adult;
-        $roomType->room_type_child = $request->child;
         if ($request->file('avatar')) {
             $image = $request->file('avatar');
 
@@ -155,8 +145,6 @@ class RoomTypeController extends Controller
             'price' => 'required|numeric',
             'info' => 'required',
             'quote' => 'required',
-            'adult' => 'required|numeric|max:4|min:1',
-            'child' => 'nullable|numeric|max:5|min:0',
             'avatar' => 'required|file|image|max:2000',
             'listImage' => 'required',
             'listImage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
@@ -168,13 +156,6 @@ class RoomTypeController extends Controller
             'price.numeric' => 'Giá không đúng định dạng',
             'info.required' => 'Thông tin không được để trống',
             'quote.required' => 'Mô tả ngắn không được để trống',
-            'adult.required' => 'Số người lớn không được để trống',
-            'adult.numeric' => 'Dữ liệu không đúng định dạng',
-            'adult.max' => 'Số người lớn tối đa là 4',
-            'adult.min' => 'Số người lớn tối thiểu là 1',
-            'child.numeric' => 'Dữ liệu không đúng định dạng',
-            'child.max' => 'Số trẻ em tối đa là 5',
-            'child.min' => 'Số trẻ em tối thiểu là 0',
             'avatar.required' => 'Ảnh đại diện không được để trống',
             'avatar.image' => 'Dữ liệu không đúng định dạng',
             'avatar.max' => 'Dung lượng ảnh tối đa là 2MB',
@@ -190,8 +171,6 @@ class RoomTypeController extends Controller
         $roomType->room_type_desc = $request->description;
         $roomType->room_type_info = $request->info;
         $roomType->quote = $request->quote;
-        $roomType->room_type_adult = $request->adult;
-        $roomType->room_type_child = $request->child;
         $roomType->room_type_amount = $request->amount;
 
         if ($request->file('avatar')) {
@@ -238,8 +217,8 @@ class RoomTypeController extends Controller
      */
     public function destroy($id)
     {
-        $room = RoomType::all();
-        $room->delete();
+        $room = Room::where('room_type_id',$id)->get();
+        $room->each->delete();
         $roomType = RoomType::find($id);
         $listImages = ListImage::where('room_type_id', $roomType->room_type_id)->get();
         foreach ($listImages as $image) {

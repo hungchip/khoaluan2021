@@ -1,10 +1,5 @@
 @extends('admin.default.master')
 @section('content')
-<!-- Page Heading -->
-{{-- <h1 class="h3 mb-2 text-gray-800">Tables</h1> --}}
-{{-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. --}}
-    {{-- For more information about DataTables, please visit the <a target="_blank"
-        href="https://datatables.net">official DataTables documentation</a>.</p> --}}
 
 <!-- DataTales Example -->
 <div class="row justify-content-center">
@@ -26,16 +21,19 @@
                         </select>
                     </div>
                     <div class="col-sm-6">
-                        <label for="">Số lượng</label>
-                        <input type="number" class="form-control form-control-user" style="padding: 0px 20px;" id="amount"
-                            placeholder="số lượng" name="amount" value="1">
-                        <span class="error-message text-danger">{{$errors->first('amount')}}</span></p>
+                        <label for="">Số phòng</label>
+                        <input type="text" class="form-control form-control-user" style="padding: 0px 20px;" id="room_number"
+                            placeholder="Số phòng" name="room_number" >
+                        <span class="error-message text-danger">{{$errors->first('room_number')}}</span></p>
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-success btn-user btn-block col-sm-3 mg-0-auto">
                     Thêm mới
                 </button>
+                <a href="{{route('room.index')}}" class="btn btn-primary btn-user btn-block col-sm-3 mg-0-auto">
+                    Quay lại
+                </a>
             </form>
         </div>
     </div>

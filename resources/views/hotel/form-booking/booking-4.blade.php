@@ -1,7 +1,9 @@
 @extends('hotel.booking')
 
 @section('form-booking')
-<form action="">
+
+<div>
+    @csrf
     <div class="booking-step">
         <div class="booking-step-title ">
             1. <span>Chọn ngày</span>
@@ -70,6 +72,15 @@
 
     </div>
 
-</form>
+</div>
 
+@endsection
+
+@section('js')
+<script>
+    // $('form').submit(false);
+    // if ( window.history.replaceState ) {
+    //     window.history.replaceState( null, null, window.location.href );
+    // }
+</script>
 @endsection

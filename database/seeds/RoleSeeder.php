@@ -18,10 +18,10 @@ class RoleSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         DB::table('hc_roles')->insert([
-            ['name' => 'admin'],
-            ['name' => 'author'],
-            ['name' => 'receptionist'],
-            ['name' => 'basic'],
+            ['role_name' => 'admin'],
+            ['role_name' => 'author'],
+            ['role_name' => 'receptionist'],
+            ['role_name' => 'basic'],
         ]);
     }
 }

@@ -35,23 +35,23 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function blogs()
-    // {
-    //     return $this->hasMany('App\Models\Blog', 'admin_id');
-    // }
+    public function blogs()
+    {
+        return $this->hasMany('App\Models\Blog', 'admin_id');
+    }
 
-    // public function roles()
-    // {
-    //     return $this->belongsToMany('App\Models\Role', 'admins_roles', 'admin_id', 'role_id');
-    // }
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role', 'hc_admins_roles', 'admin_id', 'role_id')->withPivot('status');
+    }
 
-    // public function hasAnyRoles($roles)
-    // {
-    //     return null !== $this->roles()->whereIn('name', $roles)->first();
-    // }
+    public function hasAnyRoles($roles)
+    {
+        return null !== $this->roles()->whereIn('role_name', $roles)->first();
+    }
 
-    // public function hasRole($role)
-    // {
-    //     return null !== $this->roles()->where('name', $role)->first();
-    // }
+    public function hasRole($role)
+    {
+        return null !== $this->roles()->where('role_name', $role)->first();
+    }
 }

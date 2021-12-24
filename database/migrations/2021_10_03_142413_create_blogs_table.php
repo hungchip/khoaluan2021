@@ -14,7 +14,13 @@ class CreateBlogsTable extends Migration
     public function up()
     {
         Schema::create('hc_blogs', function (Blueprint $table) {
-            $table->id();
+            $table->increments('blog_id');
+            $table->integer('admin_id')->unsigned();
+            $table->foreign('admin_id')->references('admin_id')->on('hc_admins')->onDelete('cascade');
+            $table->string('title');
+            $table->text('quote');
+            $table->longText('content');
+            $table->string('thumbnail');
             $table->timestamps();
         });
     }

@@ -11,12 +11,18 @@
     <link rel="stylesheet" href="{{asset('public/hotel/css/reset.css')}}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('public/hotel/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('public/hotel/css/bootstrap.min.css')}}">
+    {{--
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    --}}
     <!-- fontawesome -->
     <link rel="stylesheet" href="{{asset('public/hotel/fonts/all.css')}}">
     <!-- slick -->
+    <link rel="stylesheet" href="{{asset('public/hotel/css/slick.css')}}">
+    {{--
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    --}}
     <!-- <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css"> -->
     <!-- fickity -->
     <link rel="stylesheet" href="{{asset('public/hotel/css/flickity.css')}}">
@@ -65,9 +71,9 @@
                             <li class="nav-item">
                                 <a class="" href="{{route('showPageGallery')}}">Bộ sưu tập</a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a class="" href="{{route('showPageBlog')}}">Blog</a>
-                            </li> --}}
+                            <li class="nav-item">
+                                <a class="" href="{{route('showPageBlog')}}">Bài viết</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="" href="{{route('showPageContact')}}">Liên hệ</a>
                             </li>
@@ -128,22 +134,28 @@
     <!-- jquery -->
     <script src="{{ asset('public/hotel/js/jquery-3.5.1.min.js')}}"></script>
     <!-- jquery ui -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+    <script src="{{ asset('public/hotel/js/jquery-ui.js') }}"></script>
     <!-- popper  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+    </script> --}}
+    <script src="{{asset('public/hotel/js/popper.min.js')}}"></script>
     <!-- boostrap -->
     <script src="{{ asset('public/hotel/js/bootstrap.min.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+    </script> --}}
+
+    <script src="{{ asset('public/hotel/js/bootstrap.bundle.min.js')}}"></script>
     <!-- flikity -->
     <script src="{{ asset('public/hotel/js/flickity.pkgd.min.js')}}"></script>
     <!-- jquery migrate -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-3.0.0.js"></script>
     <!-- slick -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    {{-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js">
+    </script> --}}
+    <script src="{{ asset('public/hotel/js/slick.min.js')}}"></script>
     <!-- less -->
     <script src="https://cdn.jsdelivr.net/npm/less@4.1.1"></script>
     <!-- ionicon -->
@@ -157,70 +169,6 @@
     <!-- main -->
     <script src="{{ asset('public/hotel/js/main.js')}}"></script>
     @yield('js')
-    <script>
-        // test
-            
-
-        // ajax for step 1
-
-        $(document).ready(function() {
-            // $('.booking-room-image').on('click', function(){
-            //     console.log('hello');
-            // });
-            // $('#btn-search1').on('click', function(e){
-            //     e.preventDefault(); // ngăn load lại trang
-            //     $.ajax({
-            //     url: "{{route('showStepOne')}}",
-            //     type: 'get',
-            //     data: $('#form-booking').serialize(),
-            //     // datatype: 'html',
-            //     success: function(response) {
-            //         // response is string -> parse to HTML
-            //         // console.log(response);
-            //         var parser = new DOMParser();
-            //         var htmlDoc = parser.parseFromString(response, 'text/html');
-            //         var bookingSideInner = htmlDoc.getElementsByClassName('booking-side-1'); 
-            //         var bookingMainInner = htmlDoc.getElementsByClassName('booking-main-1'); 
-            //         var test = document.getElementsByClassName('booking-side').innerHTML;
-            //         // console.log(htmlDoc.body.innerHTML);
-            //         // console.log(bookingSideInner);
-            //         $('.booking-side').html(bookingSideInner);
-            //         $('.booking-main').html(bookingMainInner);
-            //     },
-            //     error: function(response) {
-            //         // console.log(response);
-            //         alert('Thất bại!!!');
-            //     }
-            //     });
-            // });
-
-            // $('#btn-select').on('click', function(e){
-            //     e.preventDefault(); // ngăn load lại trang
-            //     $.ajax({
-            //     url: "{{route('showStepTwo')}}",
-            //     type: 'get',
-            //     // data: $('#form-booking').serialize(),
-            //     success: function(response) {
-            //         alert('thành công!!!');
-            //         // response is string -> parse to HTML
-            //         $('.booking-side').html(response);
-            //         var parser = new DOMParser();
-            //         // var htmlDoc = parser.parseFromString(response, 'text/html');
-            //         // var bookingSideInner = htmlDoc.getElementsByClassName('booking-side').innerHTML; 
-            //         // var bookingMainInner = htmlDoc.getElementsByClassName('booking-main-1'); 
-            //         // var test = document.getElementsByClassName('booking-side');
-            //         // console.log(htmlDoc);
-            //         // $('.booking-side').html(bookingSideInner);
-            //         // $('.booking-main').html(bookingMainInner);
-            //     },
-            //     error: function(response) {
-            //         console.log(response);
-            //         alert('Thất bại!!!');
-            //     }
-            //     });
-            // });
-        });
-    </script>
 </body>
 
 </html>

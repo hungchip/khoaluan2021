@@ -15,8 +15,6 @@ class RoomType extends Model
         'room_type_desc',
         'room_type_info',
         'quote',
-        'room_type_adult',
-        'room_type_child',
         'avatar',
         'list_image',
         'room_type_amount',
@@ -26,5 +24,7 @@ class RoomType extends Model
     {
         return $this->hasMany('App\Models\Room', 'room_type_id');
     }
+
+    
 }
 

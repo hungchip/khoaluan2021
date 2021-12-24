@@ -216,6 +216,14 @@ a {
     background-color: transparent;
 }
 
+a:hover {
+    color: unset;
+}
+
+a:hover>* {
+    color: unset;
+}
+
 
 /**
    * 1. Remove the bottom border in Chrome 57-
@@ -537,4 +545,8 @@ template {
 
 [hidden] {
     display: none;
+}
+
+.absolute {
+    position: absolute;
 }

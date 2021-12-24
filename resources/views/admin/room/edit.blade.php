@@ -10,9 +10,9 @@
     <div class="col-lg-7">
         <div class="p-3">
             <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Chỉnh sửa loại phòng </h1>
+                <h1 class="h4 text-gray-900 mb-4">Chỉnh sửa phòng </h1>
             </div>
-            <form action="{{route('roomType.update',$roomType->room_type_id)}}" class="user" method="post"
+            <form action="{{route('room.update',$room->room_id)}}" class="user" method="post"
                 enctype="multipart/form-data">
                 
                 @csrf
@@ -20,74 +20,27 @@
                 
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Tên loại phòng</label>
+                        <label for="">Số phòng</label>
                         <input type="text" class="form-control form-control-user" id=""
-                            value="{{$roomType->room_type_name}}" name="name">
-                        <span class="error-message text-danger">{{$errors->first('name')}}</span></p>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Giá</label>
-                        <input type="number" class="form-control form-control-user" id=""
-                            value="{{$roomType->room_type_price}}" name="price">
-                        <span class="error-message text-danger">{{$errors->first('price')}}</span></p>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Số lượng</label>
-                        <input type="number" class="form-control form-control-user" id=""
-                            value="{{$roomType->room_type_amount}}" name="amount">
-                        <span class="error-message text-danger">{{$errors->first('amount')}}</span></p>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="">Mô tả</label>
-                        <input type="text" class="form-control form-control-user" id=""
-                            value="{{$roomType->room_type_desc}}" name="description">
-                        <span class="error-message text-danger">{{$errors->first('description')}}</span></p>
+                            value="{{$room->room_number}}" name="room_number">
+                        <span class="error-message text-danger">{{$errors->first('room_number')}}</span></p>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Mô tả ngắn</label>
-                        <input type="text" class="form-control form-control-user" id="" value="{{$roomType->quote}}"
-                            name="quote">
-                        <span class="error-message text-danger">{{$errors->first('quote')}}</span></p>
+                        <label for="">Loại phòng</label>
+                        <select name="roomTypeId" id="" class="form-control form-control-user" style="padding: 0px 20px;">
+                            @foreach($roomTypes as $roomType)
+                            <option {{($roomType->room_type_id == $room->room_type_id) ? 'selected' : ''}} class="" value="{{$roomType->room_type_id}}">{{$roomType->room_type_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="">Người lớn</label>
-                        <input type="number" class="form-control form-control-user" id=""
-                            value="{{$roomType->room_type_adult}}" name="adult">
-                        <span class="error-message text-danger">{{$errors->first('adult')}}</span></p>
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Trẻ em</label>
-                        <input type="number" class="form-control form-control-user" id=""
-                            value="{{$roomType->room_type_child}}" name="child">
-                        <span class="error-message text-danger">{{$errors->first('child')}}</span></p>
-                    </div>
-                    <div class="col-sm-12  ">
-                        <label for="avatar"> Ảnh đại diện</label>
-                        <img src="{{asset('public/image/')}}/{{$roomType->avatar}}" alt="" width="300">
-                        <input type="file" class="form-control form-control-user" id="avatar" 
-                            name="avatar" value="{{$roomType->avatar}}" accept="image/*">
-                        <span class="error-message text-danger">{{$errors->first('avatar')}}</span></p>
-                    </div>
-                    <div class="col-sm-12  ">
-                        <label for="listImage"> Danh sách ảnh </label>
-
-                        @foreach ($listImages as $image)
-                        <img src="{{asset('public/image/')}}/{{$image->link}}" alt="" width="200">
-                        @endforeach
-
-                        <input type="file" class="form-control form-control-user" id="listImage" name="listImage[]"
-                            multiple="multiple" accept="image/*" value="">
-                        <span class="error-message text-danger">{{$errors->first('listImage')}}</span></p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="info"> Thông tin</label>
-                    <textarea name="info" id="ckeditor" rows="5">{{$roomType->room_type_info}}</textarea>
-                    <span class="error-message text-danger">{{$errors->first('info')}}</span></p>
+                    
                 </div>
                 <button type="submit" class="btn btn-success btn-user btn-block col-sm-3 mg-0-auto">
                     Cập nhật
                 </button>
+                <a href="{{route('room.index')}}" class="btn btn-primary btn-user btn-block col-sm-3 mg-0-auto">
+                    Quay lại
+                </a>
             </form>
         </div>
     </div>

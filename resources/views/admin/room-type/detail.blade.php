@@ -28,14 +28,7 @@
                         <h4 class=" mb-2 text-dark">Mô tả ngắn</h4>
                         <p> {{$roomType->quote}}</p>
                     </div>
-                    <div class="col-sm-6">
-                        <h4 class=" mb-2  text-dark">Người lớn</h4>
-                        <p> {{$roomType->room_type_adult}}</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <h4 class=" mb-2 text-dark">Trẻ em</h4>
-                        <p> {{$roomType->room_type_child}}</p>
-                    </div>
+                    
                     <div class="col-sm-12">
                         <h4 class=" mb-2 text-dark">Mô tả
                         </h4>
