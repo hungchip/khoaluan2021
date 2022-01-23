@@ -73,7 +73,7 @@
             <input type="hidden" name="booking_id" value="{{$booking->booking_id}}">
             <input type="hidden" name="admin_id" value="{{Auth::guard('admin')->user()->admin_id}}">
             <?php 
-            if($booking->status ==0){
+            if($booking->status ==0 ){
             ?><button <?php if($valid==0){ echo 'disabled' ; } ?>
                 class="btn btn-success btn-user btn-block col-sm-3 mg-0-auto ">Duyệt đơn này</button>
             <?php }?>

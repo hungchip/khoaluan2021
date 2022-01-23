@@ -6,7 +6,8 @@
             {{-- <img src="{{asset('public/hotel/images/logoae.png')}}" alt="test ảnh" height="40" class="CToWUd"> --}}
         </div>
     </div>
-    <p>Xin chào <strong>{{$request->name}}</strong> </p>
+    <p><strong>Xác nhận đặt phòng thành công !!!</strong></p>
+    <p>Xin chào <strong>{{$booking->guest->guest_name}}</strong> </p>
     <p>Cảm ơn bạn đã chọn <strong>Khách Sạn Anh Em Hotel</strong> của chúng tôi cho kỳ nghỉ sắp tới. Yêu cầu đặt
         phòng của bạn đã được xác nhận. Thông tin đặt phòng như sau:
     </p>
@@ -18,7 +19,7 @@
                 <td style="vertical-align:top;width:25%;text-align:left"> {{$booking->booking_id}} </td>
                 <td style="white-space:nowrap;width:25%;vertical-align:top;text-align:left;font-weight:bold"> Họ tên
                     khách hàng: </td>
-                <td style="vertical-align:top;width:25%;text-align:left">{{$request->name}} </td>
+                <td style="vertical-align:top;width:25%;text-align:left">{{$booking->guest->guest_name}} </td>
             </tr>
             <tr>
                 <td style="white-space:nowrap;width:25%;vertical-align:top;text-align:left;font-weight:bold">Ngày, giờ
@@ -27,18 +28,18 @@
                 </td>
                 <td style="white-space:nowrap;width:25%;vertical-align:top;text-align:left;font-weight:bold">
                     Email: </td>
-                <td style="vertical-align:top;text-align:left"><a href="mailto:{{$request->email}}"
-                        target="_blank">{{$request->email}}</a></td>
+                <td style="vertical-align:top;text-align:left"><a href="mailto:{{$booking->guest->guest_email}}"
+                        target="_blank">{{$booking->guest->guest_email}}</a></td>
             </tr>
             <tr>
                 <td style="white-space:nowrap;width:25%;vertical-align:top;text-align:left;font-weight:bold"> Tình
                     trạng: </td>
                 <td style="vertical-align:top;font-weight:bold;text-align:left">
-                    <span style="color:red">Chưa thanh toán</span>
+                    <span style="color:red">Đã duyệt</span>
                 </td>
                 <td style="white-space:nowrap;width:25%;vertical-align:top;text-align:left;font-weight:bold"> Số điện
                     thoại: </td>
-                <td style="vertical-align:top;text-align:left">{{$request->phone}}</td>
+                <td style="vertical-align:top;text-align:left">{{$booking->guest->guest_phone}}</td>
             </tr>
             <tr style="height:15px"></tr>
         </tbody>
@@ -274,13 +275,14 @@
             </tr>
             <tr>
                 <td colspan="4" style="vertical-align:top;font-weight:bold;text-align:center;">
-                    <span style="color:red">Quý khách vui lòng thanh toán (tối thiểu là tiền cọc) trong vòng 48h, nếu không đơn đặt phòng sẽ bị
-                        hủy</span>
+                    {{-- <span style="color:red">Quý khách vui lòng thanh toán (tối thiểu là tiền cọc) trong vòng 48h, nếu
+                        không đơn đặt phòng sẽ bị
+                        hủy</span> --}}
                 </td>
             </tr>
         </tbody>
     </table>
-    {{-- <table cellpadding="4" cellspacing="0" border="0" style="width:100%">
+    <table cellpadding="4" cellspacing="0" border="0" style="width:100%">
 
         <tbody>
             <tr>
@@ -289,7 +291,7 @@
                 </td>
                 <td style="width:20%;text-align:right">
 
-                    <strong>0</strong>
+                    <strong>{{number_format($booking->deposit)}}</strong>
                 </td>
             </tr>
             <tr style="height:10px"></tr>
@@ -299,12 +301,13 @@
                     <strong>Số tiền còn thiếu (VND)</strong>
                 </td>
                 <td style="width:20%;text-align:right;color:red">
-                    <strong>2,368,080</strong>
+                    <strong>{{number_format(($totalPrice * $abs_diff)-$booking->deposit)}}</strong>
                 </td>
             </tr>
 
         </tbody>
     </table>
+    {{--
     <table cellpadding="4" cellspacing="0" border="0" style="width:100%">
         <tbody>
             <tr>

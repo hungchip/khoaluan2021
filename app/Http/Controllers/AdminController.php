@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Models\Admin;
 use App\Models\Booking;
+use App\Models\Contact;
 use App\Models\Role;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -55,27 +57,30 @@ class AdminController extends Controller
     public function index()
     {
         $bookings = Booking::all();
-        // date_format($bookings[1]->created_at,"m") lấy tháng;
         $count = 0;
         // $start = strtotime(date("1-m-Y"));
         // $end = strtotime(date("t-m-Y"));
-        $thisMoth = date("m");
+        $thisMoth = date("m"); // get this month
+        $thisYear = date("Y"); //get this year
+        // dd(date_format($bookings[10]->created_at, "Y"));
         $bookingThisMonths = [];
         foreach ($bookings as $booking) {
-            if (date_format($booking->created_at, "m") == $thisMoth) {
+            if (date_format($booking->created_at, "Y") == $thisYear) {
                 $bookingThisMonths[] = $booking;
                 $count++;
             }
         }
+
         $admins = Admin::all();
         $roomTypes = RoomType::all();
         $pendingRequests = Booking::where('status', 0)->get();
         $monthData = [];
+
         for ($i = 0; $i < 12; $i++) {
             $monthData[] = $i;
             $monthData[$i] = 0;
             foreach ($bookings as $booking) {
-                if (date_format($booking->created_at, "m") == $i + 1) {
+                if (date_format($booking->created_at, "m") == $i + 1 && date_format($booking->created_at, "Y") == $thisYear) {
                     $monthData[$i]++;
                 }
             }
@@ -96,8 +101,8 @@ class AdminController extends Controller
                 $status[2]++;
             }
         }
-
-        return view('admin.index', compact('count', 'admins', 'roomTypes', 'pendingRequests', 'monthData', 'status'));
+        $contacts = Contact::where('status', 0)->get();
+        return view('admin.index', compact('count', 'contacts', 'admins', 'roomTypes', 'pendingRequests', 'monthData', 'status'));
     }
 
     /**
@@ -139,9 +144,10 @@ class AdminController extends Controller
         $admin->admin_email = $request->adminEmail;
         $admin->password = bcrypt($request->password);
         $admin->admin_name = $request->adminName;
+        $admin->save();
         $admin->roles()->attach(Role::where('role_name', 'basic')->first());
         // save and return with message
-        $admin->save();
+
         return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Thêm mới thành công!!!']);
     }
 
@@ -301,4 +307,95 @@ class AdminController extends Controller
     {
         return view('admin.charts');
     }
+    // filter by option
+    public function bookingFilter(Request $request)
+    {
+        $from = date('Y-m-d', strtotime($request->from));
+        $to = date('Y-m-d', strtotime($request->to));
+        $period = strtotime($request->to) - strtotime($request->from);
+        $day = round($period / (60 * 60 * 24)); // đếm khoảng cách ngày
+        $bookings = Booking::whereBetween('created_at', [$from, $to])
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as amount'))
+            ->groupBy('date')
+            ->orderBy('date', 'desc')
+            ->get();
+
+        $arrData = [];
+        for ($i = 0; $i <= $day; $i++) {
+            // echo date('d/m/Y', strtotime($request->from) + (60 * 60 * 24 * $i + 1));
+        }
+        for ($i = 0; $i <= $day; $i++) {
+            if ($this->statisticCheckFilter($request, $bookings, $i)) {
+                $booking = $this->statisticCheckFilter($request, $bookings, $i);
+                $arrData[$i] = [
+                    'day' => date('d/m/Y', strtotime($booking->date)),
+                    'value' => $booking->amount,
+                ];
+            } else {
+                $arrData[$i] = [
+                    'day' => date('d/m/Y', strtotime($request->from) + (60 * 60 * 24 * $i + 1)),
+                    'value' => 0,
+                ];
+            }
+
+        }
+
+        echo $data = json_encode($arrData);
+    }
+
+    public function statisticCheckFilter(Request $request, $bookings, $i)
+    {
+        foreach ($bookings as $booking) {
+            if (date('d/m/Y', strtotime($request->from) + (60 * 60 * 24 * $i + 1)) == date('d/m/Y', strtotime($booking->date))) {
+                return $booking;
+            }
+        }
+        return null;
+    }
+
+    public function bookingStatistic()
+    {
+        return view('admin.statistic.booking');
+    }
+
+    // get booking for this month
+
+    public function thisMonth()
+    {
+        $bookings = Booking::whereMonth('created_at', '=', date('m'))
+            ->groupBy('date')
+            ->orderBy('date', 'desc')
+            ->get([
+                DB::raw('Date(created_at) as date'),
+                DB::raw('COUNT(*) as amount'),
+            ]);
+        $arrData = [];
+        for ($i = 0; $i < date('t'); $i++) {
+            if ($this->statisticCheckDefault($i + 1 . '/m/Y', $bookings)) {
+                $booking = $this->statisticCheckDefault($i + 1 . '/m/Y', $bookings);
+                $arrData[$i] = [
+                    'day' => date($i + 1 . '/m/Y'),
+                    'value' => $booking->amount,
+                ];
+            } else {
+                $arrData[$i] = [
+                    'day' => date($i + 1 . '/m/Y'),
+                    'value' => 0,
+                ];
+            }
+        }
+
+        echo $hihi = json_encode($arrData);
+    }
+
+    public function statisticCheckDefault($date, $bookings)
+    {
+        foreach ($bookings as $booking) {
+            if (strtotime(date('d/m/Y', strtotime($booking->date))) == strtotime(date($date))) {
+                return $booking;
+            }
+        }
+        return null;
+    }
+
 }

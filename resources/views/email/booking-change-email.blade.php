@@ -7,8 +7,8 @@
         </div>
     </div>
     <p>Xin chào <strong>{{$request->name}}</strong> </p>
-    <p>Cảm ơn bạn đã chọn <strong>Khách Sạn Anh Em Hotel</strong> của chúng tôi cho kỳ nghỉ sắp tới. Yêu cầu đặt
-        phòng của bạn đã được xác nhận. Thông tin đặt phòng như sau:
+
+    <p>Khách sạn Anh Em Hotel đã xác nhận sự thay đổi đặt phòng của bạn. Thông tin đặt phòng mới như sau</p>
     </p>
     <table cellpadding="4" cellspacing="0" border="0">
         <tbody>
@@ -34,7 +34,13 @@
                 <td style="white-space:nowrap;width:25%;vertical-align:top;text-align:left;font-weight:bold"> Tình
                     trạng: </td>
                 <td style="vertical-align:top;font-weight:bold;text-align:left">
-                    <span style="color:red">Chưa thanh toán</span>
+                    <span style="color:red">
+                        @if($booking->deposit>0)
+                        Đã thanh toán
+                        @else
+                        Chưa thanh toán
+                        @endif
+                    </span>
                 </td>
                 <td style="white-space:nowrap;width:25%;vertical-align:top;text-align:left;font-weight:bold"> Số điện
                     thoại: </td>
@@ -273,14 +279,18 @@
                 </td>
             </tr>
             <tr>
+                @if($booking->deposit == 0)
                 <td colspan="4" style="vertical-align:top;font-weight:bold;text-align:center;">
-                    <span style="color:red">Quý khách vui lòng thanh toán (tối thiểu là tiền cọc) trong vòng 48h, nếu không đơn đặt phòng sẽ bị
+                    <span style="color:red">Quý khách vui lòng thanh toán (tối thiểu là tiền cọc) trong vòng 48h, nếu
+                        không đơn đặt phòng sẽ bị
                         hủy</span>
                 </td>
+                @endif
             </tr>
         </tbody>
     </table>
-    {{-- <table cellpadding="4" cellspacing="0" border="0" style="width:100%">
+    @if($booking->deposit>0)
+    <table cellpadding="4" cellspacing="0" border="0" style="width:100%">
 
         <tbody>
             <tr>
@@ -289,7 +299,7 @@
                 </td>
                 <td style="width:20%;text-align:right">
 
-                    <strong>0</strong>
+                    <strong>{{number_format($booking->deposit)}}</strong>
                 </td>
             </tr>
             <tr style="height:10px"></tr>
@@ -299,12 +309,15 @@
                     <strong>Số tiền còn thiếu (VND)</strong>
                 </td>
                 <td style="width:20%;text-align:right;color:red">
-                    <strong>2,368,080</strong>
+                    <strong>{{number_format(($totalPrice * $abs_diff)-$booking->deposit)}}</strong>
                 </td>
             </tr>
 
         </tbody>
     </table>
+    @endif
+
+    {{--
     <table cellpadding="4" cellspacing="0" border="0" style="width:100%">
         <tbody>
             <tr>

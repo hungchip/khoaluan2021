@@ -43,12 +43,6 @@ class RoomController extends Controller
         $roomType->room_type_amount++;
         $roomType->save();
 
-        // for ($i = 0; $i < $request->amount; $i++) {
-        //     $room = new Room();
-        //     $room->room_type_id = $request->roomType;
-        //     $room->save();
-        // }
-
         $room = new Room();
         $room->room_type_id = $request->roomType;
         $room->room_number = $request->room_number;
@@ -68,7 +62,7 @@ class RoomController extends Controller
         $room = Room::find($id);
         $roomType = RoomType::find($room->room_type_id);
 
-        return view('admin.room.detail', compact('room','roomType'));
+        return view('admin.room.detail', compact('room', 'roomType'));
     }
 
     /**
@@ -81,7 +75,7 @@ class RoomController extends Controller
     {
         $room = Room::find($id);
         $roomTypes = RoomType::all();
-        return view('admin.room.edit', compact('room','roomTypes'));
+        return view('admin.room.edit', compact('room', 'roomTypes'));
     }
 
     /**
@@ -93,18 +87,23 @@ class RoomController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'room_number' => 'required',
+        ], [
+        ]);
+        
         $room = Room::find($id);
-        if($room->room_type_id != $request->roomTypeId){
+        if ($room->room_type_id != $request->roomTypeId) {
             $oldRoomType = RoomType::where('room_type_id', $room->room_type_id)->get();
             $oldRoomType->room_type_amount--;
             $oldRoomType->save();
+
             $newRoomType = RoomType::where('room_type_id', $request->roomTypeId)->get();
             $newRoomType->room_type_amount++;
             $newRoomType->save();
             $room->room_type_id = $request->roomTypeId;
         }
-        
-        
+
         $room->room_number = $request->room_number;
         $room->save();
         return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Sửa phòng thành công !!!']);
@@ -129,7 +128,7 @@ class RoomController extends Controller
     public function showMapRoom()
     {
         $rooms = Room::all();
-        $roomTypes = RoomType::where('room_type_amount','>',0)->get();
+        $roomTypes = RoomType::where('room_type_amount', '>', 0)->get();
         $emptyRooms = Room::where('room_status', 0)->get();
         $checkedRooms = Room::where('room_status', '!=', 0)->get();
         return view('admin.room.map', compact('rooms', 'roomTypes', 'emptyRooms', 'checkedRooms'));

@@ -9,9 +9,9 @@
         </div>
         <div class="list-icon">
             <div class="text-primary icon-item"><i class="fas fa-home"></i> Tổng phòng ({{count($rooms)}}) </div>
-            <div class="text-danger icon-item"><i class="fas fa-bed"></i> Phòng đang có khách ({{count($checkedRooms)}}) </div>
+            {{-- <div class="text-danger icon-item"><i class="fas fa-bed"></i> Phòng đang có khách ({{count($checkedRooms)}}) </div>
             <div class="text-success icon-item"><i class="fas fa-bed"></i> Phòng trống ({{count($emptyRooms)}}) </div>
-            <div class="text-warning icon-item"><i class="fas fa-calendar-alt"></i> Phòng đã đặt () </div>
+            <div class="text-warning icon-item"><i class="fas fa-calendar-alt"></i> Phòng đã đặt () </div> --}}
         </div>
     </div>
     <div class="card-body">

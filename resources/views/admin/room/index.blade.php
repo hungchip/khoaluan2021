@@ -12,20 +12,6 @@
 <form action="" method="get" class="user relative mb-30">
     <div class="container-fluid">
         <div class="form-group row">
-            {{-- <div class="col-sm-3 mb-20 mb-sm-0">
-                <input type="text" class="form-control form-control-user" id="" placeholder="ID" name="adminID">
-            </div>
-            <div class="col-sm-3 mb-20 mb-sm-0">
-                <input type="text" class="form-control form-control-user" id="" placeholder="Email" name="adminEmail">
-            </div>
-            <div class="col-sm-3 mb-20 mb-sm-0">
-                <input type="text" class="form-control form-control-user" id="" placeholder="Tên" name="adminName">
-            </div>
-            <div class="col-sm-1  mb-sm-0 mb-20 h-50px">
-                <button class="btn btn-primary btn-user btn-search">
-                    <i class="fas fa-search"></i>&nbsp; Tìm Kiếm
-                </button>
-            </div> --}}
             @if (Auth::guard('admin')->user()->hasRole('admin'))
             <div class="col-sm-1  mb-sm-0 mb-20 h-50px">
                 <a href="{{route('room.create')}}" class="btn btn-success btn-user btn-search">

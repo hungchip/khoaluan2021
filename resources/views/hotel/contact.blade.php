@@ -49,7 +49,7 @@
                             <span class="error-message text-danger">{{$errors->first('phone')}}</span></p>
 
                             <div class="confirm-list">
-                                <label for="message">Lời nhắn</label>
+                                <label for="message">Lời nhắn <span>*</span></label>
                                 <textarea name="message" id="message" rows="3"></textarea>
                             </div>
                             <span class="error-message text-danger">{{$errors->first('message')}}</span></p>

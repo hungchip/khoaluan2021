@@ -76,7 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <label for="">Số lượng</label>
                         <select name="room_amount" id="select_room_amount" class="form-control form-control-user"
                             style="padding: 0px 20px;" onchange="getval(this);">
@@ -87,6 +87,22 @@
                             <option value="5">5</option>
                         </select>
                     </div>
+                    {{-- <div class="col-sm-2">
+                        <label for="deposite">Tiền cọc</label>
+                        <input type="number" class="form-control form-control-user" id="deposite" 
+                            name="deposite">
+                    </div>
+                    <div class="col-sm-1">
+                        <label for="depositStatus">Đặt cọc</label>
+                        <input type="checkbox" class="form-control form-control-user" id="depositStatus" value="{{old('deposit')}}"
+                            name="deposit_status">
+                    </div> --}}
+                    <div class="col-sm-3">
+                        <label for="creater">ID người tạo</label>
+                        <input type="text" readonly class="form-control form-control-user" id="creater" 
+                            name="creater" value="{{Auth::guard('admin')->user()->admin_id}}">
+                    </div>
+
                     <div class="room-wrap col-sm-12">
                         <div class="room-item">
                             <p class="font-weight-bold">Phòng 1</p>

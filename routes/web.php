@@ -30,6 +30,7 @@ Route::get('/booking-step-3', 'BookingController@showStepThree')->name('showStep
 Route::get('/booking-step-4', 'BookingController@showStepFour')->name('showStepFour');
 Route::get('/booking-final', 'BookingController@showFinalStep')->name('showFinalStep');
 Route::get('/gallery', 'HomeController@showPageGallery')->name('showPageGallery');
+// Route::get('/room-search', 'HomeController@showRoomRessult')->name('showPageSeacrh');
 Route::get('/list-blog', 'HomeController@showPageBlog')->name('showPageBlog');
 Route::get('/blog-detail/{id}', 'HomeController@showBlogDetail')->name('showBlogDetail');
 Route::get('/contact', 'HomeController@showPageContact')->name('showPageContact');
@@ -56,8 +57,9 @@ Route::group(['prefix' => '/', 'middleware' => ['checklogin','roles:basic']], fu
     //chỉ quyền admin
     Route::group(['middleware' => 'roles:admin'], function () {
         Route::post('assign-role', 'AdminController@assignRole')->name('assignRole');
-        
-
+        Route::get('booking-filter','AdminController@bookingFilter')->name('bookingFilter');
+        Route::get('booking-statistic','AdminController@bookingStatistic')->name('bookingStatistic');
+        Route::get('this-month','AdminController@thisMonth')->name('thisMonth');
     });
     // admin,tiếp tân
     Route::group(['middleware' => 'roles:admin;receptionist'], function () {
@@ -83,6 +85,7 @@ Route::group(['prefix' => '/', 'middleware' => ['checklogin','roles:basic']], fu
     Route::resource('service', 'ServiceController');
     Route::resource('roomType', 'RoomTypeController');
     Route::resource('room', 'RoomController');
+    Route::resource('adcontact', 'ContactController');
     Route::get('show-map-room', 'RoomController@showMapRoom')->name('showMapRoom');
     Route::resource('gallerys', 'GalleryController');
     

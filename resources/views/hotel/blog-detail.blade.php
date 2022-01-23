@@ -15,8 +15,9 @@
                         <h1>{{$blog->title}}</h1>
                         <div class="is-divider"></div>
                         <div class="author-info">
-                            <span class="post-on">Đăng lúc <span class="post-time"></span></span>
-                            <span class="post-by"> bởi <span class="author"></span></span>
+                            <span class="post-on ">Đăng lúc <span class="post-time">
+                                    {{date('d/m/Y',strtotime($blog->created_at))}}</span></span>
+                            <span class="post-by"> bởi <span class="author">{{$blog->admin->admin_name}}</span></span>
                         </div>
                     </div>
                     <img src="{{ asset('public/image/blog/')}}/{{$blog->thumbnail}}" alt="">
@@ -29,7 +30,7 @@
                 </article>
             </div>
             <div class="col-md-3">
-                
+
                 {{-- <aside class="blog-search">
                     <form action="">
                         <input type="text" class="form-control input-search" placeholder="Tìm kiếm bài viết">
@@ -47,7 +48,8 @@
                                     <div class="post-date-item">
                                         <span class="post-day">{{date('d',strtotime($blog->created_at))}}</span>
                                         <br>
-                                        <span class="post-month"><strong>{{date('M',strtotime($blog->created_at))}}</strong></span>
+                                        <span
+                                            class="post-month"><strong>{{date('M',strtotime($blog->created_at))}}</strong></span>
                                     </div>
                                     <p class="post-title">{{$recentBlog->title}}</p>
                                 </div>
@@ -56,7 +58,7 @@
                         @endforeach
                     </ul>
                 </aside>
-                
+
             </div>
         </div>
     </div>
@@ -69,6 +71,15 @@
     .banner {
         background-image: url('{{asset('public/hotel/images/room-05.jpeg')}}');
         height: 400px;
+    }
+
+    .author-info {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .intro-top {
+        font-size: 36px;
     }
 </style>
 @endsection

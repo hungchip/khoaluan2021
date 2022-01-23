@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <label for="select_room_amount">Số lượng</label>
                         <select name="room_amount" id="select_room_amount" class="form-control form-control-user"
                             style="padding: 0px 20px;">
@@ -82,6 +82,26 @@
                                 : '' }}>{{$i+1}}</option>
                                 @endfor
                         </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="deposit">Tiền cọc (VNĐ)</label>
+                        <input type="number" class="form-control form-control-user" id="deposit" value="{{$booking->deposit}}"
+                            name="deposit">
+                    </div>
+                    <div class="col-sm-1">
+                        <label for="depositStatus">Đặt cọc</label>
+                        <input type="checkbox" class="form-control form-control-user" id="depositStatus"
+                            name="deposit_status" >
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="creater_id">ID người tạo</label>
+                        <input type="text" readonly class="form-control form-control-user" id="creater_id" 
+                            name="creater_id" value="{{($booking->creater_id == 0) ? 'Khách' : $booking->creater_id}}">
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="edittoe_id">ID người Sửa</label>
+                        <input type="text" readonly class="form-control form-control-user" id="edittoe_id" 
+                            name="edittoe_id" value="{{Auth::guard('admin')->user()->admin_id}}">
                     </div>
                     <div class="room-wrap col-sm-12">
                         @for($i = 0; $i < 5; $i++) <div class="room-item"
@@ -243,5 +263,7 @@
         $('#address').val('địa chỉ gì đó');
         $('#input-out').val('Vũ Việt Hưng');
     });
+
+    // $('#')
 </script>
 @endsection

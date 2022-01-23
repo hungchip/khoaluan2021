@@ -10,6 +10,32 @@
 <!-- Content Row -->
 <div class="row">
 
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Yêu cầu đặt phòng đang chờ duyệt</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            <?php 
+                        $count = 0;
+                        foreach ($pendingRequests as $request) {
+                            if (strtotime($request->created_at) + 172800 >= time()){
+                                $count++;
+                            }
+                        }
+                        echo $count;    
+                        ?>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
         <div class="card border-left-primary shadow h-100 py-2">
@@ -17,8 +43,8 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            Đặt phòng (Tháng này) </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{$count}}</div>
+                            Liên hệ mới </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{count($contacts)}}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-calendar-check fa-2x text-gray-300"></i>
@@ -62,61 +88,8 @@
         </div>
     </div>
 
-    <!-- Earnings (Monthly) Card Example -->
-    {{-- <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                        </div>
-                        <div class="row no-gutters align-items-center">
-                            <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                            </div>
-                            <div class="col">
-                                <div class="progress progress-sm mr-2">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     <!-- Pending Requests Card Example -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                            Yêu cầu đặt phòng đang chờ duyệt</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            <?php 
-                        $count = 0;
-                        foreach ($pendingRequests as $request) {
-                            if (strtotime($request->created_at) + 172800 >= time()){
-                                $count++;
-                            }
-                        }
-                        echo $count;    
-                        ?>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <!-- Content Row -->
@@ -128,7 +101,18 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Số đặt phòng năm nay</h6>
+                {{-- <h6 class="m-0 font-weight-bold text-primary">Số đặt phòng năm nay</h6> --}}
+                <div class="filter">
+                    {{-- <form action="">
+                        <select id="barFilter" class="form-control">
+                            <option value="thisWeek">Tuần này</option>
+                            <option value="thisMonth">Tháng này</option>
+                            <option value="previousWeek">Tuần trước</option>
+                            <option value="previousMonth">Tháng trước</option>
+                            <option value="thisYear">Năm nay</option>
+                        </select>
+                    </form> --}}
+                </div>
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -343,97 +327,112 @@
     </div>
 </div>
 @endsection
+@section('css')
+<style>
+    .filter {
+        width: 200px;
 
+    }
+</style>
+@endsection
 @section('js')
 <script>
+    $(document).ready(function() {
+    });
+
+    
+
+    //bar chart gốc
     //bar chart
     var ctx = document.getElementById("myBarChart");
-    var myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
-            datasets: [{
-                label: "Đơn",
-                backgroundColor: "#36b9cc",
-                hoverBackgroundColor: "#2e59d9",
-                borderColor: "#4e73df",
-                data: [
-                    <?php 
-                    foreach($monthData as $key => $value){
-                        echo  $value . ",";
-                    }?>
-                ],
-            }],
-        },
-        options: {
-            maintainAspectRatio: false,
-            layout: {
-                padding: {
-                    left: 10,
-                    right: 25,
-                    top: 25,
-                    bottom: 0
-                }
-            },
-            scales: {
-                xAxes: [{
-                    time: {
-                        unit: 'month'
-                    },
-                    gridLines: {
-                        display: false,
-                        drawBorder: false
-                    },
-                    ticks: {
-                        maxTicksLimit: 6
-                    },
-                    maxBarThickness: 25,
+        var myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                // labels: label,
+                labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+                datasets: [{
+                    label: "Đơn",
+                    backgroundColor: "#36b9cc",
+                    hoverBackgroundColor: "#2e59d9",
+                    borderColor: "#4e73df",
+                    // data: data,
+                    data: [
+                        <?php 
+                        foreach($monthData as $key => $value){
+                            echo  $value . ",";
+                        }?>
+                    ],
                 }],
-                yAxes: [{
-                    ticks: {
-                        min: 0,
-                        max: 1500,
-                        maxTicksLimit: 5,
-                        padding: 10,
-                        // Include a dollar sign in the ticks
-                        callback: function(value, index, values) {
-                            return number_format(value);
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'month'
+                        },
+                        gridLines: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            maxTicksLimit: 6
+                        },
+                        maxBarThickness: 25,
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 1500,
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function(value, index, values) {
+                                return number_format(value);
+                            }
+                        },
+                        gridLines: {
+                            color: "rgb(234, 236, 244)",
+                            zeroLineColor: "rgb(234, 236, 244)",
+                            drawBorder: false,
+                            borderDash: [2],
+                            zeroLineBorderDash: [2]
                         }
-                    },
-                    gridLines: {
-                        color: "rgb(234, 236, 244)",
-                        zeroLineColor: "rgb(234, 236, 244)",
-                        drawBorder: false,
-                        borderDash: [2],
-                        zeroLineBorderDash: [2]
+                    }],
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 14,
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return number_format(tooltipItem.yLabel) + ' ' +
+                                datasetLabel;
+                        }
                     }
-                }],
-            },
-            legend: {
-                display: false
-            },
-            tooltips: {
-                titleMarginBottom: 10,
-                titleFontColor: '#6e707e',
-                titleFontSize: 14,
-                backgroundColor: "rgb(255,255,255)",
-                bodyFontColor: "#858796",
-                borderColor: '#dddfeb',
-                borderWidth: 1,
-                xPadding: 15,
-                yPadding: 15,
-                displayColors: false,
-                caretPadding: 10,
-                callbacks: {
-                    label: function(tooltipItem, chart) {
-                        var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                        return number_format(tooltipItem.yLabel) + ' ' +
-                            datasetLabel;
-                    }
-                }
-            },
-        }
-    });
+                },
+            }
+        });
 
     //pie chart
     var ctx = document.getElementById("myPieChart");

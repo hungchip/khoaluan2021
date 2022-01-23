@@ -71,6 +71,9 @@
                 <button type="submit" class="btn btn-success btn-user btn-block col-sm-3 mg-0-auto">
                     Cập nhật
                 </button>
+                <a href="{{route('roomType.index')}}" class="btn btn-primary btn-user btn-block col-sm-3 mg-0-auto">
+                    Quay lại
+                </a>
             </form>
         </div>
     </div>

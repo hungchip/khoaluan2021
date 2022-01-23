@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GallerySeeder::class);
         $this->call(RoomSeeder::class);
         $this->call(BlogSeeder::class);
-        // $this->call(GuestSeeder::class);
-        // $this->call(BookingSeeder::class);
+        $this->call(GuestSeeder::class);
+        $this->call(BookingSeeder::class);
     }
 }

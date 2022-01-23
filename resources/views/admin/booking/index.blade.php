@@ -25,9 +25,9 @@
             <div class="col-sm-2 mb-20 mb-sm-0">
                 <select name="status" id="status" class="form-control form-control-user"
                     style="padding: 0px 20px; height:50px">
-                    <option value="0" selected>Chọn trạng thái</option>
-                    <option value="1">Chờ duyệt</option>
-                    <option value="2">Đã duyệt</option>
+                    <option value="" selected>Chọn trạng thái</option>
+                    <option value="0">Chờ duyệt</option>
+                    <option value="1">Đã duyệt</option>
                     <option value="3">Đã hủy</option>
                 </select>
             </div>
@@ -62,6 +62,7 @@
                         <th>Ngày đi</th>
                         <th>Số lượng phòng</th>
                         <th>Ngày tạo</th>
+                        <th>Tiền cọc</th>
                         <th>Trạng thái</th>
                         <th>Thiết lập</th>
                     </tr>
@@ -75,6 +76,7 @@
                         <th>Ngày đi</th>
                         <th>Số lượng phòng</th>
                         <th>Ngày tạo</th>
+                        <th>Tiền cọc</th>
                         <th>Trạng thái</th>
                         <th>Thiết lập</th>
                     </tr>
@@ -89,6 +91,8 @@
                         <td>{{date('d/m/Y', strtotime($booking->checkout))}}</td>
                         <td>{{$booking->amount}}</td>
                         <td>{{$booking->created_at->format('d-m-Y H:i:s')}}</td>
+                        <td>{{number_format($booking->deposit)}} VNĐ &nbsp; <input onclick="return false;" type="checkbox" {{($booking->deposit_status ==1
+                            ) ? 'checked' : '' }}></td>
                         <td>
                             {{-- 1. chờ duyệt/ 2. đã duyệt/ 3.đã hủy --}}
                             @if($booking->status == 0)
@@ -97,8 +101,6 @@
                                 duyệt</span>
                             @elseif ($booking->status == 1)
                             <span class="btn-success btn-sm">Đã duyệt</span>
-                            @elseif($booking->status == 2)
-                            <span class="btn-warning btn-sm">Đã Trả phòng</span>
                             @elseif($booking->status == 3)
                             <span class="btn-danger btn-sm">Đã hủy</span>
                             @endif
@@ -125,7 +127,7 @@
                                     btn-sm" title="Hủy đặt phòng">
                                     <i class="fas fa-trash"></i>
                                 </button>
-                                
+
                             </form>
                         </td>
                     </tr>

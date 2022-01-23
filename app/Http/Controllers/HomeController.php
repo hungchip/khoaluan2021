@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Blog;
+use App\Models\Contact;
 use App\Models\Gallery;
 use App\Models\ListImage;
 use App\Models\Room;
@@ -42,11 +43,18 @@ class HomeController extends Controller
         return view('hotel.about');
     }
 
-    public function showPageRoom()
+    public function showPageRoom(Request $request)
     {
-        $roomTypes = RoomType::where('room_type_amount', '>', 0)->get();
-
-        return view('hotel.rooms', compact('roomTypes'));
+        if ($request->data != null) {
+            $roomTypes = RoomType::orWhere('room_type_name', 'LIKE', '%' . $request->data . '%')
+                ->orWhere('room_type_price', $request->data)
+                ->where('room_type_amount', '>', 0)
+                ->get();
+        } else {
+            $roomTypes = RoomType::where('room_type_amount', '>', 0)->get();
+        }
+        $specialRooms = RoomType::orderBy('room_type_price', 'DESC')->take(5)->get();
+        return view('hotel.rooms', compact('roomTypes', 'specialRooms'));
     }
 
     public function showPageBooking()
@@ -61,10 +69,20 @@ class HomeController extends Controller
         return view('hotel.gallery', compact('gallerys'));
     }
 
-    public function showPageBlog()
+    public function showPageBlog(Request $request)
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
+
         $recentBlogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
+
+        if ($request->data != null) {
+            $blogs = Blog::where('title', 'like', '%' . $request->data . '%')
+                ->orWhere('quote', 'LIKE', '%' . $request->data . '%')
+                ->orderBy('created_at', 'desc')->get();
+        } else {
+            $blogs = Blog::orderBy('created_at', 'desc')->get();
+        }
+
+        $specialRooms = RoomType::orderBy('room_type_price', 'DESC')->take(5)->get();
         return view('hotel.blog', compact('blogs', 'recentBlogs'));
     }
 
@@ -77,16 +95,21 @@ class HomeController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'phone' => 'required',
             'message' => 'required',
         ], []);
+        $contact = new Contact();
+        $contact->contact_name = $request->name;
+        $contact->contact_email = $request->email;
+        $contact->contact_phone = $request->phone;
+        $contact->contact_content = $request->message;
+        $contact->save();
 
         Mail::send('email.contact-email', [
             'request' => $request,
         ], function ($email) use ($request) {
             $email->to($request->email);
-            $email->from($request->email);
             $email->subject('Anh Em Hotel');
         });
 
@@ -106,6 +129,27 @@ class HomeController extends Controller
         $blog = Blog::find($id);
         $recentBlogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
         return view('hotel.blog-detail', compact('blog', 'recentBlogs'));
+    }
+
+    public function showPageSeacrh(Request $request)
+    {
+        // $roomTypes = RoomType::all();
+        // $blogs = Blog::orderBy('created_at', 'desc')->get();
+        $recentBlogs = Blog::orderBy('created_at', 'desc')->take(5)->get();
+        $specialRooms = RoomType::orderBy('room_type_price', 'desc')->take(3)->get();
+
+        if ($request->data) {
+            //tìm loại phòng theo giá và theo tên
+            $roomTypes = RoomType::where('room_type_name', 'LIKE', '%' . $request->data . '%')
+                ->orWhere('room_type_price', $request->data)
+                ->get();
+            //tìm bài viết theo tiêu đề
+            $blogs = Blog::where('title', 'LIKE', '%' . $request->data . '%')
+                ->orWhere('quote', 'LIKE', '%' . $request->data . '%')
+                ->get();
+
+        }
+        return view('hotel.search', compact('blogs', 'recentBlogs', 'roomTypes', 'specialRooms'));
     }
 
 }

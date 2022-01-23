@@ -9,26 +9,11 @@
 {{-- <div class="text-center">
     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
 </div> --}}
-<form action="" method="get" class="user relative mb-30">
-    <div class="container-fluid">
-        <div class="form-group row">
 
-            @if (Auth::guard('admin')->user()->hasRole('admin'))
-            <div class="col-sm-1  mb-sm-0 mb-20 h-50px">
-                <a href="{{route('roomType.create')}}" class="btn btn-success btn-user btn-search">
-                    <i class="fas fa-user-plus"></i></i>&nbsp; Thêm mới
-                </a>
-
-            </div>
-            @endif
-        </div>
-    </div>
-
-</form>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Danh sách các loại phòng</h6>({{count($roomTypes)}} kết quả)
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách liên hệ</h6>({{$contacts->total()}} kết quả)
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -37,10 +22,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
-                        <th>Ảnh đại diện</th>
-                        <th>Ngày khởi tạo</th>
+                        <th>Email</th>
+                        <th>Ngày gửi</th>
+                        <th>Trạng thái</th>
                         <th>Thiết lập</th>
                     </tr>
                 </thead>
@@ -48,45 +32,51 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên</th>
-                        <th>Giá</th>
-                        <th>Số lượng</th>
-                        <th>Ảnh đại diện</th>
-                        <th>Ngày khởi tạo</th>
+                        <th>Email</th>
+                        <th>Ngày gửi</th>
+                        <th>Trạng thái</th>
                         <th>Thiết lập</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach($roomTypes as $roomType)
+                    @foreach($contacts as $contact)
                     <tr>
-                        <td>{{$roomType->room_type_id}}</td>
-                        <td>{{$roomType->room_type_name}}</td>
-                        <td>{{number_format($roomType->room_type_price)}}</td>
-                        <td>{{$roomType->room_type_amount}}</td>
-                        <td><img src="public/image/{{$roomType->avatar}}" alt="" width="200"></td>
-                        <td>{{date('d-m-Y H:m:s', strtotime($roomType->created_at))}}</td>
+                        <td>{{$contact->contact_id}}</td>
+                        <td>{{$contact->contact_name}}</td>
+                        <td>{{$contact->contact_email}}</td>
+                        <td>{{date('d-m-Y H:m:s', strtotime($contact->created_at))}}</td>
+                        <td>
+                            @if($contact->status == 0)
+                            Chưa đọc
+                            @else
+                            Đã đọc
+                            @endif
+                        </td>
+                        <td>
+                            <form action="{{route('adcontact.destroy',$contact->contact_id)}}" method="post">
+                                @csrf
+                                @method('delete')
 
-                        <form action="{{route('roomType.destroy',$roomType->room_type_id)}}" method="post">
-                            @csrf
-                            @method('delete')
-                            <td>
-                                <a href="{{route('roomType.show',$roomType->room_type_id)}}"
+                                <a href="{{route('adcontact.show',$contact->contact_id)}}"
                                     class="btn btn-primary btn-circle btn-sm" title="Chi tiết">
                                     <i class="fas fa-info"></i>
                                 </a>
                                 @if (Auth::guard('admin')->user()->hasRole('admin'))
-                                <a href="{{route('roomType.edit',$roomType->room_type_id)}}"
+                                {{-- <a href="{{route('adcontact.edit',$contact->contact_id)}}"
                                     class="btn btn-warning btn-circle btn-sm" title="Chỉnh sửa">
                                     <i class="fas fa-user-edit"></i>
                                 </a>
                                 <button class="btn btn-danger btn-circle btn-sm" title="Xóa">
                                     <i class="fas fa-trash"></i>
-                                </button>
+                                </button> --}}
                                 @endif
-                            </td>
-                        </form>
+
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
+                {{ $contacts->appends(Request::all())->links() }}
             </table>
         </div>
     </div>
@@ -127,11 +117,4 @@
         height: 50px;
     }
 </style>
-@endsection
-
-@section('js')
-<script src="">
-
-
-</script>
 @endsection

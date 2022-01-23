@@ -75,7 +75,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-user-tie"></i>
+                    <i class="fas fa-tasks"></i>
                     <span>Quản lý</span>
                 </a>
                 <div id="collapseAdmin" class="collapse" aria-labelledby="headingUtilities"
@@ -87,6 +87,20 @@
                         <a class="collapse-item" href="{{route('showMapRoom')}}">Sơ Đồ Phòng</a>
                         <a class="collapse-item" href="{{route('room.index')}}">Phòng</a>
                         <a class="collapse-item" href="{{route('service.index')}}">Dịch Vụ</a>
+                        {{-- <a class="collapse-item" href="{{route('bookingStatistic')}}">Thống kê</a> --}}
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin2"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Thống kê</span>
+                </a>
+                <div id="collapseAdmin2" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('bookingStatistic')}}">Đơn đặt phòng</a>
                     </div>
                 </div>
             </li>
@@ -112,6 +126,11 @@
                 </div>
             </li> --}}
             <!-- bài viết  -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('adcontact.index')}}">
+                    <i class="far fa-newspaper"></i>
+                    <span>Liên hệ</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('roomType.index')}}">
                     <i class="far fa-newspaper"></i>

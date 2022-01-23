@@ -19,54 +19,72 @@
         </div>
     </div>
     <div class="booking-side">
-        <h4 class="sb-title">Đặt phòng</h4>
-        <ul>
-            <li><span>Check In: </span>{{date('d/m/Y', strtotime($arr['t_start']))}}</li>
-            <li><span>Check Out: </span>{{date('d/m/Y', strtotime($arr['t_end']))}}</li>
-        </ul>
-        @for($i = 0; $i < $roomAmount; $i++)
-        <h4 class="sb-title">Phòng {{$i + 1}} / {{$roomAmount}}
-            {{-- <a href="" class="btn btn-edit">edit</a> --}}
-        </h4>
-        <ul>
-            <li><span>Loại phòng: </span></li>
-            <li><span>Khách: </span>
-                <span class="guest-wrapper">
-                    <span>Người lớn {{$roomAdult[$i]}}</span>,
-                    <span> Trẻ em {{$roomChild[$i]}}</span>
-                </span>
-            </li>
-        </ul>
-        @endfor
-        {{-- <h4 class="sb-title">Room 2 of 2</h4>
-        <ul>
-            <li><span>Room:</span> Standard Room</li>
-            <li><span>Guest: </span>
-                <span class="guest-wrapper">
-                    <span>Adult 2</span>,
-                    <span> Child 1</span>
-                </span>
-            </li>
-        </ul> --}}
-        {{-- <h4 class="sb-title">Additional Fees</h4>
-        <ul>
-            <li><span>Airport transfer:</span> 1</li>
-            <li><span>Room cleaning fee:</span> 1</li>
-            <li><span>Add any custom service:</span> 1</li>
-        </ul> --}}
-        <div class="price-detail">
-            <p class="deposite-notice">Tổng giá</p>
-            <h3 class="deposite-price">{{number_format($roomType->room_type_price * $roomAmount)}} VND</h3>
-            {{-- <hr>
-            <p class="total-notice">Total price</p>
-            <h3 class="total-price">$1,000,</h3> --}}
-            {{-- <p class="detail"><a href="">Detail</a></p> --}}
-        </div>
-        <!-- <button>Edit Booking</button> -->
+        <form action="">
+            <?php 
+            $totalPrice = 0;
+            $start = new DateTime($arr['t_start']);
+            $end = new DateTime($arr['t_end']);
+    
+            $abs_diff = $end->diff($start)->format("%a");
+            ?>
+
+            <input type="hidden" name="t_start" value="{{$arr['t_start']}}">
+            <input type="hidden" name="t_end" value="{{$arr['t_end']}}">
+            {{-- <input type="hidden" name="room_adult" value="{{$arr['room_adult']}}"> --}}
+            {{-- <input type="hidden" name="room_child" value="{{$arr['room_child']}}"> --}}
+            {{-- <input type="hidden" name="room_type_id" value="{{$roomType->room_type_id}}"> --}}
+            <h4 class="sb-title">Đặt phòng ({{$abs_diff}} đêm)</h4>
+            <ul>
+                <li><span>Check In: </span>{{date('d/m/Y', strtotime($arr['t_start']))}}</li>
+                <li><span>Check Out: </span>{{date('d/m/Y', strtotime($arr['t_end']))}}</li>
+            </ul>
+
+            @for($i = 0; $i < $roomAmount; $i++) <h4 class="sb-title">Phòng {{$i + 1}} / {{$roomAmount}}</h4>
+                <ul>
+                    <li>
+                        <span>Loại phòng:
+                            @foreach($roomTypes as $roomType)
+                            @if($roomType->room_type_id == $roomTypeId[$i])
+                            {{$roomType->room_type_name}}
+                            <?php 
+                                $totalPrice += $roomType->room_type_price;
+                            ?>
+                            @endif
+                            @endforeach
+                        </span>
+                    </li>
+                    <li><span>Khách: </span>
+                        <span class="guest-wrapper">
+                            <span>Người lớn {{$roomAdult[$i]}}</span>,
+                            <span> Trẻ em {{$roomChild[$i]}}</span>
+                        </span>
+                    </li>
+                    <li><span>Giá: </span>
+                        <span class="guest-wrapper">
+                            @foreach($roomTypes as $roomType)
+                            @if($roomType->room_type_id == $roomTypeId[$i])
+                            <span>{{number_format($roomType->room_type_price)}} VND/đêm</span>
+                            @endif
+                            @endforeach
+                        </span>
+                    </li>
+                </ul>
+                @endfor
+
+                <div class="price-detail">
+                    <p class="deposite-notice">Tổng tiền</p>
+                    <h3 class="deposite-price">{{number_format($totalPrice * $abs_diff)}} VND</h3>
+                    <p class="deposite-notice">Cọc trước</p>
+                    <h3 class="total-price">{{number_format(($totalPrice * $abs_diff)/10)}} VND</h3>
+                </div>
+        </form>
     </div>
     <div class="booking-main">
         <h4 class="sb-title">Đặt phòng hoàn tất</h4>
-        <p>Thank you for booking</p>
+        <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi. Đơn đặt phòng đã được gửi đến đỉa chỉ Email của bạn. <span
+                class="text-danger">Bạn vui lòng xác nhận và thanh toán tiền đặt cọc trong vòng 48h nếu ko đơn đặt phòng
+                của bạn sẽ bị hủy.</span></p>
+
     </div>
     <div class="clearfix">
 

@@ -42,7 +42,7 @@ class Admin extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role', 'hc_admins_roles', 'admin_id', 'role_id')->withPivot('status');
+        return $this->belongsToMany('App\Models\Role', 'hc_admins_roles', 'admin_id', 'role_id');
     }
 
     public function hasAnyRoles($roles)

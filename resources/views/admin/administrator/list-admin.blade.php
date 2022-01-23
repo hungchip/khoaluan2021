@@ -102,7 +102,7 @@
 
                                 <label for="receptionistRole{{$admin->admin_id}}" class=" role-label">Tiếp tân</label>
 
-                                <input type="checkbox" name="basicRole" id="basicRole{{$admin->admin_id}}"
+                                {{-- <input type="checkbox" name="basicRole" id="basicRole{{$admin->admin_id}}"
                                     readonly="true" class=" role-check" onclick="return false;"
                                     {{$admin->hasRole('basic') ?
                                 'checked' : '' }} onclick="{{Auth::guard('admin')->user()->hasRole('admin') ? 'return
@@ -110,7 +110,7 @@
                                 return false;'}}">
 
                                 <label for="basicRole{{$admin->admin_id}}" class=" role-label">Nhân
-                                    viên</label>
+                                    viên</label> --}}
                             </td>
                             <td> @if(Auth::guard('admin')->user()->hasRole('admin'))
 

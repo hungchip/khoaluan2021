@@ -30,35 +30,31 @@ class BookingController extends Controller
             $status = $request->status;
             $idcard = $request->idcard;
             $query = Booking::query();
-            if ($checkin) {
-
-            }
 
             if ($bookingID) {
                 $query->where('booking_id', 'LIKE', '%' . $bookingID . '%');
             }
             if ($email) {
-                $query->select('hc_bookings.*', 'hc_guests.guest_email')->join('hc_guests', 'hc_guests.guest_id', '=', 'hc_bookings.guest_id')->where('guest_email', 'LIKE', '%' . $email . '%');
+                $query->select('hc_bookings.*', 'g1.guest_email')->join('hc_guests as g1', 'g1.guest_id', '=', 'hc_bookings.guest_id')->where('g1.guest_email', 'LIKE', '%' . $email . '%');
             }
             if ($name) {
-                $query->where('guest_name', 'LIKE', '%' . $name . '%');
+                $query->select('hc_bookings.*', 'g2.guest_name')->join('hc_guests as g2', 'g2.guest_id', '=', 'hc_bookings.guest_id')->where('g2.guest_name', 'like', '%' . $name . '%');
             }
             if ($phone) {
-                $query->where('guest_phone', 'LIKE', '%' . $phone . '%');
+                $query->where('g1.guest_phone', 'LIKE', '%' . $phone . '%');
             }
             if ($idcard) {
-                $query->where('guest->idcard', 'LIKE', '%' . $idcard . '%');
+                $query->where('g1.guest_idcard', 'LIKE', '%' . $idcard . '%');
             }
-            if ($status) {
+            if ($status != null) {
                 $query->where('status', $status);
             }
-
             $bookings = $query->orderBy('created_at', 'desc')->paginate(10);
-            return view('admin.booking.index', compact('bookings'));
         } else {
             $bookings = Booking::orderBy('created_at')->paginate(10);
-            return view('admin.booking.index', compact('bookings'));
         }
+
+        return view('admin.booking.index', compact('bookings'));
     }
 
     /**
@@ -107,8 +103,6 @@ class BookingController extends Controller
         $arr['room_amount'] = $request->room_amount;
         $arr['idcard'] = $request->idcard;
         $roomAmount = $request->room_amount;
-        // $arr['checkin'] = $request->t_start;
-        // $arr['checkout'] = $request->t_end;
         $roomTypeId = $request->room_type_id;
         $roomAdult = $request->room_adult;
         $roomChild = $request->room_child;
@@ -116,8 +110,8 @@ class BookingController extends Controller
         $bookingID = $this->createBooking($arr, $roomAdult, $roomChild, $roomTypeId);
         $booking = Booking::find($bookingID);
         $bookingDetails = BookingDetail::where('booking_id', $bookingID)->get();
-        // $roomType = RoomType::find($request->room_type_id);
         $roomType = RoomType::where('room_type_id', $request->room_type_id)->first();
+        $roomTypes = RoomType::where('room_type_amount', '>', 0)->get();
 
         //send mail
         Mail::send('email.booking-confirm-email', [
@@ -132,9 +126,7 @@ class BookingController extends Controller
         if ($request->flag) {
             return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Tạo đặt phòng thành công !!!']);
         } else {
-            return view('hotel.form-booking.booking-4', compact('arr', 'roomType', 'roomAmount', 'roomAdult', 'roomChild'));
-            // return redirect()->route('finish',compact('arr', 'roomType', 'roomAmount', 'roomAdult', 'roomChild'));
-            // return redirect('/booking-final');
+            return view('hotel.form-booking.booking-4', compact('arr', 'roomTypes', 'roomType', 'roomAmount', 'roomAdult', 'roomChild', 'roomTypeId'));
         }
     }
     /**
@@ -151,10 +143,9 @@ class BookingController extends Controller
         $check = BookingDetail::where('status', 2)
             ->where('booking_id', $id)->get(); // kiểm tra hợp lệ
 
-        if (count($bookingDetails) == count($check) && $booking->status != 1) {
+        if (count($bookingDetails) == count($check) && $booking->status != 1 && $booking->deposit_status == 1) {
             $valid = 1;
         }
-        // dd(count($bookingDetails), count($check));
         return view('admin.booking.detail', compact('bookingDetails', 'booking', 'valid'));
     }
 
@@ -183,7 +174,6 @@ class BookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request->validate(
             [
                 'name' => 'required',
@@ -197,13 +187,20 @@ class BookingController extends Controller
 
             ]
         );
+
         $booking = Booking::find($id);
         $booking->amount = $request->room_amount;
-        if ($request->t_start != null) {
+        if ($request->t_start != "null") {
             $booking->checkin = $request->t_start;
         }
-        if ($request->t_end != null) {
+        if ($request->t_end != "null") {
             $booking->checkout = $request->t_end;
+        }
+        if ($request->deposit_status != null) {
+            $booking->deposit_status = 1;
+        }
+        if ($request->deposit) {
+            $booking->deposit = $request->deposit;
         }
         $booking->status = 0;
         $booking->save();
@@ -238,6 +235,16 @@ class BookingController extends Controller
                 $bookingDetails[$i]->delete();
             }
         }
+
+        //send mail
+        Mail::send('email.booking-change-email', [
+            'request' => $request,
+            'booking' => $booking,
+            'bookingDetails' => $bookingDetails,
+        ], function ($email) use ($request) {
+            $email->to($request->email);
+            $email->subject('Anh Em Hotel');
+        });
 
         return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Cập nhật đặt phòng thành công !!!']);
     }
@@ -302,7 +309,6 @@ class BookingController extends Controller
         $arr['t_start'] = $request->t_start;
         $arr['t_end'] = $request->t_end;
         $roomAmount = $request->room_amount;
-        // $roomType = RoomType::find($request->room_type_id);
         $roomTypes = RoomType::where('room_type_amount', '>', 0)->get();
         return view('hotel.form-booking.booking-3', compact('arr', 'roomTypes', 'roomAmount', 'roomAdult', 'roomChild', 'roomTypeId'));
     }
@@ -401,6 +407,15 @@ class BookingController extends Controller
             $bookingDetail->status = 4; // đã duyệt
             $bookingDetail->save();
         }
+        //send mail
+        Mail::send('email.booking-success-email', [
+            'booking' => $booking,
+            'bookingDetails' => $bookingDetails,
+        ], function ($email) use ($booking) {
+            $email->to($booking->guest->guest_email);
+            $email->subject('Anh Em Hotel');
+        });
+
         return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Duyệt đặt phòng thành công !!!']);
     }
 
@@ -416,16 +431,22 @@ class BookingController extends Controller
     //     return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Kiểm tra thành công!!!']);
     // }
 
+    //kiểm tra tính hợp lệ của đặt phòng
     public function check($id)
     {
         $bookingDetail = BookingDetail::find($id);
         $booking = Booking::find($bookingDetail->booking_id);
+        $bookings = Booking::where('deposit_status', 1)->get();
+        $bookingID = [];
+        foreach ($bookings as $booking) {
+            $bookingID[] = $booking->booking_id;
+        }
         $start = strtotime($booking->checkin);
         $end = strtotime($booking->checkout);
         $bookingDettails = [];
 
         $roomTypeId = $bookingDetail->room_type_id;
-        $allBookingDetails = BookingDetail::whereIn('status', [1, 4]) //đã kiểm tra và đã giao
+        $allBookingDetails = BookingDetail::whereIn('status', [2, 4]) //đã kiểm tra và đã giao
             ->where('room_type_id', $roomTypeId)
             ->where('booking_detail_id', '!=', $id)->get(); // đặt phòng có loại phòng này và đã giao
         $rooms = Room::where('room_type_id', $roomTypeId)->get(); // số lượng phòng của loại phòng này
@@ -452,6 +473,7 @@ class BookingController extends Controller
         }
         return 0;
     }
+
     public function checkout($id)
     {
         $booking = Booking::find($id);

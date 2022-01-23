@@ -47,8 +47,8 @@ class RoomTypeController extends Controller
             'price' => 'required|numeric',
             'info' => 'required',
             'quote' => 'required',
-            'avatar' => 'required|file|image|max:2000',
-            'listImage' => 'required',
+            'avatar' => 'file|image|max:2000',
+            // 'listImage' => 'required',
             'listImage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'description' => 'required',
         ];
@@ -91,7 +91,6 @@ class RoomTypeController extends Controller
                 $listImage = new ListImage();
 
                 $getImageName = $image->getClientOriginalName();
-                // dd($getImageName);
                 $imageName = current(explode('.', $getImageName));
                 $newImage = $imageName . '-' . time() . '.' . $image->getClientOriginalExtension();
                 $image->move('public/image', $newImage);
@@ -145,8 +144,8 @@ class RoomTypeController extends Controller
             'price' => 'required|numeric',
             'info' => 'required',
             'quote' => 'required',
-            'avatar' => 'required|file|image|max:2000',
-            'listImage' => 'required',
+            'avatar' => 'file|image|max:2000',
+            // 'listImage' => 'required',
             'listImage.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'description' => 'required',
         ];
@@ -167,11 +166,11 @@ class RoomTypeController extends Controller
 
         $roomType = RoomType::find($id);
         $roomType->room_type_name = $request->name;
-        $roomType->room_type_price = 100;
+        $roomType->room_type_price = $request->price;
         $roomType->room_type_desc = $request->description;
         $roomType->room_type_info = $request->info;
         $roomType->quote = $request->quote;
-        $roomType->room_type_amount = $request->amount;
+        // $roomType->room_type_amount = $request->amount;
 
         if ($request->file('avatar')) {
             $path = 'public/image/' . $roomType->avatar;
@@ -217,7 +216,7 @@ class RoomTypeController extends Controller
      */
     public function destroy($id)
     {
-        $room = Room::where('room_type_id',$id)->get();
+        $room = Room::where('room_type_id', $id)->get();
         $room->each->delete();
         $roomType = RoomType::find($id);
         $listImages = ListImage::where('room_type_id', $roomType->room_type_id)->get();

@@ -21,6 +21,10 @@ class CreateBookingsTable extends Migration
             $table->string('checkout');
             $table->integer('status')->default(0); // chờ duyệt
             $table->integer('amount');
+            $table->integer('deposit')->nullable();
+            $table->integer('deposit_status')->default(0);
+            $table->integer('creater_id')->nullable();
+            $table->integer('editor_id')->nullable();
             $table->timestamps();
         });
     }

@@ -77,6 +77,12 @@
                             <li class="nav-item">
                                 <a class="" href="{{route('showPageContact')}}">Liên hệ</a>
                             </li>
+                            {{-- <li class="">
+                                <form action="{{route('showPageSeacrh')}}" class="form-search">
+                                    <input name="data" type="text" placeholder="Tìm kiếm... ">
+                                    <button class="btn btn-form-search"><i class="fas fa-search"></i></button>
+                                </form>
+                            </li> --}}
                             <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Dropdown
